@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- 🔥 QUAN TRỌNG CHO MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Vocab AI Final</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* INPUT */
+.input{
+  width:100%;
+  height:38px;
+  padding:6px 10px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  font-size:14px;
+}
+.input:focus{
+  border-color:#3b82f6;
+  outline:none;
+}
+
+/* BUTTON */
+.btn{
+  padding:6px 12px;
+  border-radius:10px;
+  font-size:13px;
+  font-weight:500;
+  transition:.2s;
+}
+.btn:active{
+  transform:scale(.95);
+}
+.btn:hover{
+  opacity:.85;
+}
+
+/* LOADING */
+.spinner{
+  border:3px solid #eee;
+  border-top:3px solid #3b82f6;
+  border-radius:50%;
+  width:16px;
+  height:16px;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* 📱 MOBILE TABLE SCROLL */
+.table-wrap{
+  overflow-x:auto;
+}
+</style>
+</head>
+
+<body class="bg-gray-50">
+<div id="root"></div>
+
+<script>
+const e = React.createElement;
+
+/* SAFE PARSE */
+function safeParse(t){
+  try{
+    t=(t||"").replace(/```json|```/g,"");
+    return JSON.parse(t);
+  }catch{
+    return {score:"?",meaning_status:"Error",errors:t};
+  }
+}
+
+function formatErrors(err){
+  if(!err) return [];
+  return err.split(/[\n,.]/).filter(x=>x.trim());
+}
+
+/* APP */
+function App(){
+
+  const [rows,setRows] = React.useState([]);
+
+  React.useEffect(()=>{
+    try{
+      const d = JSON.parse(localStorage.getItem("vocab_data")||"[]");
+      setRows(Array.isArray(d)?d:[]);
+    }catch{ setRows([]); }
+  },[]);
+
+  React.useEffect(()=>{
+    localStorage.setItem("vocab_data",JSON.stringify(rows));
+  },[rows]);
+
+  const apiKey="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";
+
+  const addRow=()=>setRows(r=>[...r,{word:"",meaning:"",example:"",feedback:null,loading:false}]);
+
+  const update=(i,f,v)=>{
+    setRows(r=>{
+      const c=[...r];
+      c[i]={...c[i],[f]:v};
+      return c;
+    });
+  };
+
+  const del=i=>setRows(r=>r.filter((_,idx)=>idx!==i));
+
+  async function check(i){
+    setRows(r=>{
+      const c=[...r]; c[i].loading=true; return c;
+    });
+
+    try{
+      const row=rows[i];
+      if(!row.word||!row.example) throw "missing";
+
+      const res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
+        method:"POST",
+        headers:{
+          "Authorization":"Bearer "+apiKey,
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          model:"llama-3.3-70b-versatile",
+          messages:[
+            {
+              role:"system",
+              content:`Return JSON:
+{
+"score":"x/10",
+"meaning_status":"Correct/Incorrect",
+"errors":"short phrases, comma separated",
+"improved":"short natural sentence"
+}
+Keep it concise.`
+            },
+            {
+              role:"user",
+              content:`Word: ${row.word}
+Meaning: ${row.meaning}
+Example: ${row.example}`
+            }
+          ]
+        })
+      });
+
+      const data=await res.json();
+      const txt=data?.choices?.[0]?.message?.content||"{}";
+
+      setRows(r=>{
+        const c=[...r];
+        c[i].feedback=safeParse(txt);
+        c[i].loading=false;
+        return c;
+      });
+
+    }catch{
+      setRows(r=>{
+        const c=[...r];
+        c[i].feedback={errors:"AI error"};
+        c[i].loading=false;
+        return c;
+      });
+    }
+  }
+
+  const clear=(f)=>setRows(r=>r.map(x=>({...x,[f]:f==="feedback"?null:""})));
+
+  /* FEEDBACK */
+  function Feedback(fb){
+    if(!fb) return null;
+
+    const errors = formatErrors(fb.errors);
+
+    return e("div",{
+      className:"rounded-xl border bg-white shadow-sm p-3 space-y-2 text-xs"
+    },
+
+      e("div",{className:"flex justify-between border-b pb-1"},
+        e("span",{className:"font-semibold text-gray-700"},"AI Review"),
+        e("span",{className:"text-green-600 font-bold"},fb.score||"?")
+      ),
+
+      e("div",{
+        className: fb.meaning_status==="Correct"
+        ? "text-green-600 font-medium"
+        : "text-red-500 font-medium"
+      }, fb.meaning_status||""),
+
+      errors.length>0 && e("ul",{
+        className:"bg-red-50 border border-red-200 rounded p-2 text-red-600 list-disc list-inside"
+      },
+        errors.slice(0,3).map((er,i)=>e("li",{key:i},er))
+      ),
+
+      fb.improved && e("div",{
+        className:"bg-blue-50 border border-blue-200 rounded p-2 text-blue-700 italic"
+      }, fb.improved)
+    );
+  }
+
+  return e("div",{className:"p-4 md:p-5 max-w-7xl mx-auto"},
+
+    /* HEADER */
+    e("div",{className:"flex flex-wrap gap-2 justify-between mb-4"},
+      e("div",{className:"flex gap-2 flex-wrap"},
+        e("button",{onClick:addRow,className:"btn bg-blue-500 text-white"},"＋ Add"),
+        e("button",{onClick:()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*250)),className:"btn bg-green-500 text-white"},"⚡ Check All")
+      ),
+      e("div",{className:"flex gap-2 text-xs flex-wrap"},
+        e("button",{onClick:()=>clear("word"),className:"btn bg-gray-200"},"Word"),
+        e("button",{onClick:()=>clear("meaning"),className:"btn bg-purple-100 text-purple-600"},"Meaning"),
+        e("button",{onClick:()=>clear("example"),className:"btn bg-blue-100 text-blue-600"},"Example"),
+        e("button",{onClick:()=>clear("feedback"),className:"btn bg-red-100 text-red-600"},"AI")
+      )
+    ),
+
+    /* TABLE */
+    e("div",{className:"table-wrap"},
+      e("table",{className:"min-w-[700px] w-full table-fixed bg-white rounded-xl overflow-hidden shadow-sm"},
+        e("thead",{className:"bg-blue-50 text-sm"},
+          e("tr",null,
+            ["Word","Meaning","Example","AI Feedback",""].map(h=>e("th",{key:h,className:"p-2"},h))
+          )
+        ),
+        e("tbody",null,
+          rows.map((row,i)=>
+            e("tr",{key:i,className:"border-t"},
+
+              e("td",{className:"p-2"},
+                e("input",{className:"input",value:row.word,onChange:e=>update(i,"word",e.target.value)})
+              ),
+
+              e("td",{className:"p-2"},
+                e("input",{className:"input text-purple-700",value:row.meaning,onChange:e=>update(i,"meaning",e.target.value)})
+              ),
+
+              e("td",{className:"p-2"},
+                e("input",{className:"input text-blue-700",value:row.example,onChange:e=>update(i,"example",e.target.value)})
+              ),
+
+              e("td",{className:"p-2"},
+                row.loading ? e("div",{className:"spinner"}) : e(Feedback,row.feedback)
+              ),
+
+              e("td",{className:"p-2"},
+                e("button",{onClick:()=>check(i),className:"btn bg-green-100 mr-1"},"✔"),
+                e("button",{onClick:()=>del(i),className:"btn bg-red-100"},"✖")
+              )
+
+            )
+          )
+        )
+      )
+    )
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(e(App));
+</script>
+</body>
+</html>
