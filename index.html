@@ -6,126 +6,157 @@
 <title>Vocab AI — Multi-File</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
 body{
-  font-family:'Syne',sans-serif;
+  font-family:'Be Vietnam Pro','Syne',sans-serif;
   background:var(--bg);
   color:var(--text);
   -webkit-tap-highlight-color:transparent;
-  min-height:100vh;
-  transition:background .3s,color .3s;
+  transition:background .35s,color .35s;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
-/* ════════════════════════════
-   THEMES
-════════════════════════════ */
+/* ════ THEMES ════ */
 [data-theme="light"]{
-  --bg:#f5f6fa;
+  --bg:#eef0f7;
   --bg-header:#ffffff;
   --surface:#ffffff;
-  --surface2:#f0f2f8;
-  --inp-bg:#f8f9fc;
-  --border:#e2e5f0;
-  --text:#1a1a2e;
-  --text-muted:#8b90a8;
-  --text-faint:#c4c8dc;
-  --accent:#4f6ef7;
+  --surface2:#e8eaf5;
+  --inp-bg:#ffffff;
+  --border:#bdc5e0;
+  --border-strong:#9aa4cc;
+  --text:#111327;
+  --text-muted:#4a5072;
+  --text-faint:#9fa5c0;
+  --accent:#3d5ff0;
   --accent-text:#ffffff;
-  --accent-light:#eef1fd;
-  --accent-border:#c7d2fe;
-  --purple:#7c3aed;
-  --purple-bg:#faf5ff;
-  --purple-border:#ddd6fe;
-  --green:#16a34a;
-  --green-bg:#f0fdf4;
-  --green-border:#bbf7d0;
-  --danger:#e53e3e;
-  --danger-bg:#fff5f5;
-  --danger-border:#fecaca;
-  --fb-bg:#f8f9fc;
-  --fb-border:#e2e5f0;
-  --shadow:rgba(79,110,247,.13);
-  --overlay:rgba(30,30,60,.35);
-  --tab-bg:#ffffff;
-  --scroll:#d0d4e8;
+  --accent-light:#e8edfb;
+  --accent-border:#b5c2fb;
+  --purple:#6d28d9;
+  --purple-bg:#f5f0ff;
+  --purple-border:#c4b5fd;
+  --green:#15803d;
+  --green-bg:#ecfdf5;
+  --green-border:#86efac;
+  --danger:#dc2626;
+  --danger-bg:#fef2f2;
+  --danger-border:#fca5a5;
+  --yellow:#b45309;
+  --yellow-bg:#fffbeb;
+  --yellow-border:#fcd34d;
+  --fb-bg:#f5f7fd;
+  --fb-border:#d4d9f0;
+  --shadow:rgba(61,95,240,.14);
+  --shadow-card:0 2px 14px rgba(20,30,100,.09), 0 1px 3px rgba(20,30,100,.06);
+  --shadow-sidebar:2px 0 20px rgba(20,30,100,.09);
+  --shadow-header:0 1px 16px rgba(20,30,100,.11);
+  --overlay:rgba(20,28,70,.42);
+  --scroll:#bdc5e0;
+  --sidebar-bg:#f4f6fd;
+  --toolbar-bg:rgba(238,240,247,.94);
+  --sidebar-text:#1a1e35;
+  --sidebar-text-muted:#3d4470;
 }
 [data-theme="dark"]{
   --bg:#0f0f13;
   --bg-header:#13131a;
-  --surface:#1a1a22;
-  --surface2:#22222e;
-  --inp-bg:#22222e;
-  --border:#2e2e3e;
-  --text:#e8e6e1;
-  --text-muted:#6b6b80;
-  --text-faint:#3a3a4a;
+  --surface:#1a1a24;
+  --surface2:#222230;
+  --inp-bg:#1e1e2a;
+  --border:#30304a;
+  --border-strong:#44446a;
+  --text:#e2e0f0;
+  --text-muted:#7070a0;
+  --text-faint:#3a3a5a;
   --accent:#c8f565;
   --accent-text:#0f0f13;
-  --accent-light:rgba(200,245,101,.13);
-  --accent-border:rgba(200,245,101,.3);
+  --accent-light:rgba(200,245,101,.12);
+  --accent-border:rgba(200,245,101,.28);
   --purple:#a78bfa;
-  --purple-bg:rgba(167,139,250,.12);
-  --purple-border:rgba(167,139,250,.3);
+  --purple-bg:rgba(167,139,250,.1);
+  --purple-border:rgba(167,139,250,.28);
   --green:#c8f565;
-  --green-bg:rgba(200,245,101,.1);
-  --green-border:rgba(200,245,101,.25);
-  --danger:#f56565;
-  --danger-bg:rgba(245,101,101,.12);
-  --danger-border:rgba(245,101,101,.3);
-  --fb-bg:#1a1a22;
-  --fb-border:#2e2e3e;
+  --green-bg:rgba(200,245,101,.09);
+  --green-border:rgba(200,245,101,.24);
+  --danger:#f87171;
+  --danger-bg:rgba(248,113,113,.1);
+  --danger-border:rgba(248,113,113,.28);
+  --yellow:#fbbf24;
+  --yellow-bg:rgba(251,191,36,.1);
+  --yellow-border:rgba(251,191,36,.28);
+  --fb-bg:#1a1a24;
+  --fb-border:#2e2e48;
   --shadow:rgba(0,0,0,.5);
-  --overlay:rgba(0,0,0,.72);
-  --tab-bg:#1a1a22;
-  --scroll:#2e2e3e;
+  --shadow-card:0 2px 16px rgba(0,0,0,.4), 0 1px 4px rgba(0,0,0,.3);
+  --shadow-sidebar:2px 0 20px rgba(0,0,0,.5);
+  --shadow-header:0 1px 20px rgba(0,0,0,.5);
+  --overlay:rgba(0,0,0,.75);
+  --scroll:#2e2e48;
+  --sidebar-bg:#13131a;
+  --toolbar-bg:rgba(15,15,19,.92);
+  --sidebar-text:#dddcf0;
+  --sidebar-text-muted:#9090c0;
 }
 [data-theme="ocean"]{
   --bg:#071422;
   --bg-header:#0c1e35;
-  --surface:#0c1e35;
-  --surface2:#112847;
-  --inp-bg:#112847;
-  --border:#1b3d60;
-  --text:#cce7ff;
-  --text-muted:#4d7ea8;
-  --text-faint:#1e3a5c;
+  --surface:#0d2040;
+  --surface2:#112848;
+  --inp-bg:#0d2040;
+  --border:#1c3f65;
+  --border-strong:#2a5a8a;
+  --text:#cae8ff;
+  --text-muted:#4d80aa;
+  --text-faint:#1e3c60;
   --accent:#38bdf8;
   --accent-text:#071422;
-  --accent-light:rgba(56,189,248,.14);
-  --accent-border:rgba(56,189,248,.3);
+  --accent-light:rgba(56,189,248,.13);
+  --accent-border:rgba(56,189,248,.28);
   --purple:#818cf8;
-  --purple-bg:rgba(129,140,248,.12);
-  --purple-border:rgba(129,140,248,.3);
+  --purple-bg:rgba(129,140,248,.1);
+  --purple-border:rgba(129,140,248,.28);
   --green:#34d399;
-  --green-bg:rgba(52,211,153,.1);
-  --green-border:rgba(52,211,153,.3);
+  --green-bg:rgba(52,211,153,.09);
+  --green-border:rgba(52,211,153,.28);
   --danger:#fb7185;
-  --danger-bg:rgba(251,113,133,.12);
-  --danger-border:rgba(251,113,133,.3);
+  --danger-bg:rgba(251,113,133,.1);
+  --danger-border:rgba(251,113,133,.28);
+  --yellow:#fbbf24;
+  --yellow-bg:rgba(251,191,36,.1);
+  --yellow-border:rgba(251,191,36,.28);
   --fb-bg:#0c1e35;
-  --fb-border:#1b3d60;
-  --shadow:rgba(56,189,248,.14);
-  --overlay:rgba(3,8,18,.75);
-  --tab-bg:#0c1e35;
-  --scroll:#1b3d60;
+  --fb-border:#1c3f65;
+  --shadow:rgba(56,189,248,.12);
+  --shadow-card:0 2px 16px rgba(0,5,15,.5), 0 1px 4px rgba(0,5,15,.3);
+  --shadow-sidebar:2px 0 24px rgba(0,5,15,.6);
+  --shadow-header:0 1px 20px rgba(0,5,15,.6);
+  --overlay:rgba(3,8,20,.78);
+  --scroll:#1c3f65;
+  --sidebar-bg:#0a1929;
+  --toolbar-bg:rgba(7,20,34,.92);
+  --sidebar-text:#b8deff;
+  --sidebar-text-muted:#5a8ab8;
 }
-[data-theme="rose"]{
-  --bg:#fdf2f4;
-  --bg-header:#ffffff;
+[data-theme="sakura"]{
+  --bg:#fdf0f3;
+  --bg-header:#fff6f8;
   --surface:#ffffff;
-  --surface2:#fef0f2;
-  --inp-bg:#fff5f6;
-  --border:#fbc8d0;
-  --text:#3b0a16;
-  --text-muted:#a0596a;
-  --text-faint:#e8b4bc;
+  --surface2:#fef0f3;
+  --inp-bg:#ffffff;
+  --border:#f4b8c4;
+  --border-strong:#e8869c;
+  --text:#3a0a18;
+  --text-muted:#a05570;
+  --text-faint:#e8b4be;
   --accent:#e11d48;
   --accent-text:#ffffff;
-  --accent-light:#fff1f3;
+  --accent-light:#fff0f3;
   --accent-border:#fda4af;
   --purple:#9d174d;
   --purple-bg:#fdf2f7;
@@ -136,289 +167,631 @@ body{
   --danger:#dc2626;
   --danger-bg:#fff1f2;
   --danger-border:#fca5a5;
-  --fb-bg:#fff5f6;
-  --fb-border:#fbc8d0;
-  --shadow:rgba(225,29,72,.13);
-  --overlay:rgba(60,10,20,.35);
-  --tab-bg:#ffffff;
-  --scroll:#fbc8d0;
+  --yellow:#d97706;
+  --yellow-bg:#fffbeb;
+  --yellow-border:#fde68a;
+  --fb-bg:#fff5f7;
+  --fb-border:#f4b8c4;
+  --shadow:rgba(225,29,72,.12);
+  --shadow-card:0 2px 12px rgba(150,20,50,.08), 0 1px 3px rgba(150,20,50,.05);
+  --shadow-sidebar:2px 0 20px rgba(150,20,50,.08);
+  --shadow-header:0 1px 16px rgba(150,20,50,.10);
+  --overlay:rgba(60,10,20,.4);
+  --scroll:#f4b8c4;
+  --sidebar-bg:#fff5f7;
+  --toolbar-bg:rgba(253,240,243,.92);
+  --sidebar-text:#2e0810;
+  --sidebar-text-muted:#7a2535;
 }
 [data-theme="forest"]{
-  --bg:#091409;
-  --bg-header:#0f1e0f;
-  --surface:#0f1e0f;
+  --bg:#081208;
+  --bg-header:#0e1c0e;
+  --surface:#101e10;
   --surface2:#162416;
-  --inp-bg:#162416;
-  --border:#1e3520;
-  --text:#c8f0cc;
+  --inp-bg:#102010;
+  --border:#1e3820;
+  --border-strong:#2e5030;
+  --text:#c4efc8;
   --text-muted:#507855;
-  --text-faint:#1e3520;
+  --text-faint:#1e3820;
   --accent:#4ade80;
-  --accent-text:#091409;
-  --accent-light:rgba(74,222,128,.13);
-  --accent-border:rgba(74,222,128,.3);
+  --accent-text:#081208;
+  --accent-light:rgba(74,222,128,.12);
+  --accent-border:rgba(74,222,128,.28);
   --purple:#a3e635;
-  --purple-bg:rgba(163,230,53,.1);
-  --purple-border:rgba(163,230,53,.3);
+  --purple-bg:rgba(163,230,53,.09);
+  --purple-border:rgba(163,230,53,.28);
   --green:#4ade80;
-  --green-bg:rgba(74,222,128,.1);
-  --green-border:rgba(74,222,128,.25);
+  --green-bg:rgba(74,222,128,.09);
+  --green-border:rgba(74,222,128,.24);
   --danger:#f87171;
-  --danger-bg:rgba(248,113,113,.1);
-  --danger-border:rgba(248,113,113,.3);
-  --fb-bg:#0f1e0f;
-  --fb-border:#1e3520;
-  --shadow:rgba(74,222,128,.12);
-  --overlay:rgba(0,5,0,.75);
-  --tab-bg:#0f1e0f;
-  --scroll:#1e3520;
+  --danger-bg:rgba(248,113,113,.09);
+  --danger-border:rgba(248,113,113,.28);
+  --yellow:#a3e635;
+  --yellow-bg:rgba(163,230,53,.09);
+  --yellow-border:rgba(163,230,53,.28);
+  --fb-bg:#0e1c0e;
+  --fb-border:#1e3820;
+  --shadow:rgba(74,222,128,.1);
+  --shadow-card:0 2px 16px rgba(0,5,0,.5), 0 1px 4px rgba(0,5,0,.3);
+  --shadow-sidebar:2px 0 24px rgba(0,5,0,.6);
+  --shadow-header:0 1px 20px rgba(0,5,0,.6);
+  --overlay:rgba(0,5,0,.78);
+  --scroll:#1e3820;
+  --sidebar-bg:#0a1a0a;
+  --toolbar-bg:rgba(8,18,8,.92);
+  --sidebar-text:#b8f0bc;
+  --sidebar-text-muted:#4a9050;
 }
 
-/* ════════════ SCROLLBAR ════════════ */
+/* ════ SCROLLBAR ════ */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:4px}
 
-/* ════════════ INPUT ════════════ */
+/* ════ INPUT ════ */
 .inp{
-  width:100%;padding:8px 12px;
+  width:100%;padding:10px 14px;
   background:var(--inp-bg);
-  border:1.5px solid var(--border);
-  border-radius:10px;font-size:13px;
-  font-family:'DM Mono',monospace;
-  color:var(--text);
-  transition:border-color .2s,box-shadow .2s,background .3s;
+  border:2px solid var(--border);
+  border-radius:10px;font-size:14px;
+  font-family:'Be Vietnam Pro',sans-serif;
+  color:var(--text);font-weight:500;
+  line-height:1.5;
+  transition:border-color .2s,box-shadow .2s,background .35s;
 }
-.inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-light);}
-.inp::placeholder{color:var(--text-faint);}
+.inp:hover{border-color:var(--border-strong);}
+.inp:focus{
+  border-color:var(--accent);outline:none;
+  box-shadow:0 0 0 3.5px var(--accent-light);
+  border-width:2px;
+}
+.inp::placeholder{color:var(--text-faint);font-weight:400;}
 
-/* ════════════ BUTTONS ════════════ */
+/* ════ BUTTONS ════ */
 .btn{
   padding:9px 16px;border-radius:10px;font-size:13px;
-  font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;
-  transition:all .18s;border:none;
+  font-family:'Syne',sans-serif;font-weight:700;
+  cursor:pointer;transition:all .18s;border:none;
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
-.btn:active{transform:scale(.94);}
-.btn:hover{opacity:.85;}
-.btn-accent{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 10px var(--shadow);}
+.btn:active{transform:scale(.93);}
+.btn:hover{filter:brightness(1.06);}
+.btn-accent{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 12px var(--shadow);}
 .btn-ghost{background:var(--surface);color:var(--text-muted);border:1.5px solid var(--border);}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
 .btn-danger{background:var(--danger-bg);color:var(--danger);border:1.5px solid var(--danger-border);}
 .btn-purple{background:var(--purple-bg);color:var(--purple);border:1.5px solid var(--purple-border);}
 .btn-green{background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border);}
 .btn-blue{background:var(--accent-light);color:var(--accent);border:1.5px solid var(--accent-border);}
+.btn-yellow{background:var(--yellow-bg);color:var(--yellow);border:1.5px solid var(--yellow-border);}
+.btn:disabled{opacity:.38;cursor:not-allowed;filter:none;transform:none;}
 
-/* ════════════ SPINNER ════════════ */
-.spinner{
-  border:2px solid var(--border);border-top:2px solid var(--accent);
-  border-radius:50%;width:18px;height:18px;
-  animation:spin 1s linear infinite;
-}
+/* ════ SPINNER ════ */
+.spinner{border:2px solid var(--border);border-top:2px solid var(--accent);
+  border-radius:50%;width:18px;height:18px;animation:spin .9s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ════════════ FILE TAB ════════════ */
-.file-tab{
-  padding:7px 16px;border-radius:10px;font-size:13px;font-weight:600;
-  cursor:pointer;border:1.5px solid var(--border);
-  background:var(--tab-bg);color:var(--text-muted);
-  transition:all .2s;white-space:nowrap;max-width:160px;
-  overflow:hidden;text-overflow:ellipsis;
-}
-.file-tab.active{
-  background:var(--accent);color:var(--accent-text);
-  border-color:var(--accent);box-shadow:0 2px 10px var(--shadow);
-}
-.file-tab:hover:not(.active){border-color:var(--accent);color:var(--accent);}
+/* ════ LAYOUT ════ */
+.app-shell{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.app-body{display:flex;flex:1;overflow:hidden;position:relative;}
+.content-area{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.content-scroll{flex:1;overflow-y:auto;}
+.content-inner{max-width:900px;margin:0 auto;padding:0 16px 24px;width:100%;}
 
-/* ════════════ ANIMATIONS ════════════ */
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn .25s ease both;}
-@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.slide-down{animation:slideDown .22s ease both;}
+/* ════ STICKY TOOLBAR ════ */
+.sticky-toolbar-wrap{
+  position:sticky;top:0;z-index:20;
+  background:var(--toolbar-bg);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:background .35s;
+}
+.sticky-toolbar-inner{
+  max-width:900px;margin:0 auto;
+  padding:10px 16px;
+  display:flex;flex-wrap:wrap;gap:8px;
+  justify-content:space-between;
+  align-items:center;
+}
 
-/* ════════════ MISC ════════════ */
+/* ════ SIDEBAR ════ */
+.sidebar{
+  width:256px;min-width:256px;
+  background:var(--sidebar-bg);
+  border-right:1.5px solid var(--border);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:background .35s, transform .28s cubic-bezier(.25,.8,.25,1), box-shadow .28s;
+  box-shadow:var(--shadow-sidebar);
+  z-index:40;
+}
+.sidebar-overlay{
+  position:fixed;inset:0;
+  background:var(--overlay);
+  z-index:39;
+  backdrop-filter:blur(4px);
+  animation:fadeOverlay .22s ease;
+}
+@keyframes fadeOverlay{from{opacity:0}to{opacity:1}}
+
+/* Mobile sidebar */
+@media(max-width:767px){
+  .sidebar{
+    position:fixed;left:0;top:0;bottom:0;
+    transform:translateX(-100%);
+  }
+  .sidebar.open{
+    transform:translateX(0);
+  }
+}
+
+.sidebar-top{flex-shrink:0;}
+.sidebar-file-list{
+  flex:1;overflow-y:auto;padding:6px 10px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.sidebar-file-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:12px;cursor:pointer;
+  border:1.5px solid transparent;transition:all .18s;user-select:none;
+}
+.sidebar-file-item.active{
+  background:var(--accent-light);border-color:var(--accent-border);
+  box-shadow:0 1px 8px var(--shadow);
+}
+.sidebar-file-item:hover:not(.active){background:var(--surface2);border-color:var(--border);}
+.file-label{
+  flex:1;font-size:15px;font-weight:700;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;
+  color:var(--sidebar-text);
+  font-family:'Be Vietnam Pro',sans-serif;
+  line-height:1.3;
+}
+.sidebar-file-item.active .file-label{color:var(--accent);}
+.sidebar-file-item:hover:not(.active) .file-label{color:var(--text);}
+.file-count{
+  font-size:12px;font-family:'Be Vietnam Pro',sans-serif;font-weight:600;
+  color:var(--text-muted);flex-shrink:0;
+  background:var(--surface2);padding:2px 7px;border-radius:6px;
+}
+.sidebar-file-item.active .file-count{
+  color:var(--accent);background:var(--accent-light);
+  border:1px solid var(--accent-border);
+}
+.sidebar-bottom{flex-shrink:0;}
+
+/* ════ CUSTOM CHECKBOX ════ */
+.cb{
+  width:20px;height:20px;border-radius:6px;flex-shrink:0;
+  border:2px solid var(--border-strong);background:var(--inp-bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;cursor:pointer;transition:all .15s;color:transparent;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.cb.on{background:var(--accent);border-color:var(--accent);color:var(--accent-text);box-shadow:0 2px 6px var(--shadow);}
+
+/* ════ SIDEBAR LABELS ════ */
+.sb-section{
+  padding:12px 14px 5px;font-size:11px;font-weight:700;
+  letter-spacing:.10em;text-transform:uppercase;
+  color:var(--text-muted);
+  font-family:'Be Vietnam Pro',sans-serif;
+}
+.sb-divider{height:1px;background:var(--border);margin:6px 10px;}
+
+/* ════ COUNTDOWN ════ */
+.countdown-box{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:12px;padding:12px 14px;margin:6px 10px;
+}
+.cd-num{
+  font-size:32px;font-weight:800;color:var(--accent);
+  font-family:'Syne',sans-serif;line-height:1;
+}
+.cd-lbl{
+  font-size:12px;font-weight:600;color:var(--sidebar-text-muted);
+  font-family:'Be Vietnam Pro',sans-serif;
+  letter-spacing:.02em;text-transform:uppercase;
+}
+
+/* ════ WORD CARD ════ */
+.word-card{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:16px;padding:16px;
+  transition:border-color .2s,box-shadow .2s,background .35s;
+  position:relative;
+  box-shadow:var(--shadow-card);
+}
+.word-card:hover{border-color:var(--accent);box-shadow:0 4px 22px var(--shadow);}
+.word-card.tc-red   {border-left:4px solid #ef4444;}
+.word-card.tc-yellow{border-left:4px solid #f59e0b;}
+.word-card.tc-green {border-left:4px solid #22c55e;}
+.word-card.tc-blue  {border-left:4px solid #3b82f6;}
+
+/* tag badge pills */
+.tag-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-family:'Be Vietnam Pro',sans-serif;font-weight:700;
+  padding:3px 9px;border-radius:6px;
+}
+.tp-red   {background:rgba(239,68,68,.15);   color:#ef4444;   border:1px solid rgba(239,68,68,.3);}
+.tp-yellow{background:rgba(245,158,11,.15);  color:#f59e0b;   border:1px solid rgba(245,158,11,.3);}
+.tp-green {background:rgba(34,197,94,.15);   color:#22c55e;   border:1px solid rgba(34,197,94,.3);}
+.tp-blue  {background:rgba(59,130,246,.15);  color:#3b82f6;   border:1px solid rgba(59,130,246,.3);}
+
+/* ════ TAG MENU ════ */
+.tag-menu{
+  position:absolute;top:calc(100% + 6px);right:0;z-index:120;
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:12px;padding:6px;
+  box-shadow:0 8px 30px var(--shadow);
+  display:flex;flex-direction:column;gap:3px;min-width:140px;
+  animation:fadeIn .15s ease both;
+}
+.tag-menu-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;border-radius:8px;cursor:pointer;border:none;
+  background:transparent;color:var(--text);
+  font-family:'Be Vietnam Pro',sans-serif;font-weight:600;font-size:13px;
+  transition:background .12s;text-align:left;width:100%;
+}
+.tag-menu-item:hover,.tag-menu-item.sel{background:var(--accent-light);color:var(--accent);}
+.tag-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;display:inline-block;}
+
+/* ════ FLASHCARD ════ */
+.fc-slot{
+  display:flex;align-items:center;justify-content:center;
+  min-height:44px;border-radius:10px;
+  background:var(--surface2);border:2px dashed var(--border);
+  color:var(--text-muted);font-size:13px;font-weight:600;cursor:pointer;
+  transition:all .2s;font-family:'Be Vietnam Pro',sans-serif;user-select:none;
+}
+.fc-slot:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+.fc-banner{
+  background:var(--accent-light);border:1.5px solid var(--accent-border);
+  border-radius:12px;padding:10px 16px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:13px;color:var(--accent);font-weight:700;
+  font-family:'Be Vietnam Pro',sans-serif;
+}
+
+/* ════ ICON BTN ════ */
+.icon-btn{
+  background:none;border:none;cursor:pointer;color:var(--text-muted);
+  padding:6px;border-radius:8px;display:inline-flex;align-items:center;
+  justify-content:center;transition:color .15s,background .15s;line-height:1;
+}
+.icon-btn:hover{color:var(--accent);background:var(--accent-light);}
+
+/* ════ FEEDBACK ════ */
 .score-badge{
   background:var(--accent-light);color:var(--accent);
-  padding:2px 9px;border-radius:6px;font-size:12px;font-weight:700;
-  font-family:'DM Mono',monospace;
-}
-.tag{
-  display:inline-block;font-size:10px;font-family:'DM Mono',monospace;
-  padding:2px 7px;border-radius:5px;
-}
-.overlay{
-  position:fixed;inset:0;background:var(--overlay);
-  display:flex;align-items:center;justify-content:center;
-  z-index:200;backdrop-filter:blur(6px);
-}
-.modal{
-  background:var(--surface);border:1.5px solid var(--border);
-  border-radius:18px;padding:24px;width:90%;max-width:420px;
-  box-shadow:0 16px 60px var(--shadow);animation:fadeIn .22s ease both;
+  padding:3px 10px;border-radius:6px;font-size:13px;font-weight:800;
+  font-family:'Be Vietnam Pro',sans-serif;border:1px solid var(--accent-border);
 }
 .lib-card{
   background:var(--surface);border:1.5px solid var(--border);
-  border-radius:14px;padding:14px;
+  border-radius:14px;padding:16px;
   transition:border-color .2s,box-shadow .2s;
+  box-shadow:var(--shadow-card);
 }
-.lib-card:hover{border-color:var(--accent);box-shadow:0 2px 16px var(--shadow);}
-.word-card{
+.lib-card:hover{border-color:var(--accent);box-shadow:0 4px 20px var(--shadow);}
+.tag{display:inline-block;font-size:11px;font-family:'Be Vietnam Pro',sans-serif;font-weight:600;padding:2px 8px;border-radius:5px;}
+
+/* ════ MODAL ════ */
+.overlay{
+  position:fixed;inset:0;background:var(--overlay);
+  display:flex;align-items:center;justify-content:center;
+  z-index:200;backdrop-filter:blur(8px);
+}
+.modal{
   background:var(--surface);border:1.5px solid var(--border);
-  border-radius:16px;padding:16px;
-  transition:border-color .2s,box-shadow .2s;
+  border-radius:20px;padding:24px;width:90%;max-width:440px;
+  box-shadow:0 20px 70px var(--shadow);animation:fadeIn .22s ease both;
 }
-.word-card:hover{border-color:var(--accent);box-shadow:0 3px 18px var(--shadow);}
+
+/* ════ HAMBURGER ════ */
+.hamburger{
+  background:none;border:none;cursor:pointer;
+  color:var(--text-muted);display:flex;flex-direction:column;
+  gap:4px;padding:6px;border-radius:8px;transition:color .15s;
+}
+.hamburger:hover{color:var(--accent);}
+.hamburger span{
+  display:block;width:20px;height:2px;
+  background:currentColor;border-radius:2px;
+  transition:all .22s;
+}
+
+/* ════ SETTINGS TABS ════ */
+.stab{
+  padding:7px 16px;border-radius:8px;font-size:12px;
+  font-family:'Syne',sans-serif;font-weight:700;
+  cursor:pointer;border:none;background:transparent;
+  color:var(--text-muted);transition:all .15s;
+}
+.stab.active{background:var(--accent-light);color:var(--accent);}
+.stab:hover:not(.active){color:var(--text);}
+
+/* ════ API KEY INDICATOR ════ */
+.key-status{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-family:'Be Vietnam Pro',sans-serif;
+  padding:3px 9px;border-radius:6px;font-weight:700;
+}
+.key-ok{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.key-missing{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border);}
+
+/* ════ ANIMATIONS ════ */
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .28s ease both;}
+
+/* ════ RESPONSIVE ════ */
+@media(max-width:767px){
+  .hide-mobile{display:none!important;}
+  .content-inner{padding:0 12px 24px;}
+}
+@media(min-width:768px){
+  .hide-desktop{display:none!important;}
+  .sidebar{transform:none!important;}
+}
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script>
 const e=React.createElement;
-const {useState,useEffect,useRef,useCallback}=React;
+const {useState,useEffect,useRef,useCallback,useMemo}=React;
 
-/* ════════ THEME DEFINITIONS ════════ */
+/* ──────── THEME DEFINITIONS ──────── */
 const THEMES=[
-  {id:"light",  label:"Light",   emoji:"☀️",  dot:"#e2e5f0", ring:"#4f6ef7"},
-  {id:"dark",   label:"Dark",    emoji:"🌙",  dot:"#1a1a22", ring:"#c8f565"},
-  {id:"ocean",  label:"Ocean",   emoji:"🌊",  dot:"#0c1e35", ring:"#38bdf8"},
-  {id:"rose",   label:"Rose",    emoji:"🌸",  dot:"#fdf2f4", ring:"#e11d48"},
-  {id:"forest", label:"Forest",  emoji:"🌿",  dot:"#0f1e0f", ring:"#4ade80"},
+  {id:"light",  label:"Light",  emoji:"☀️",  dot:"#dce0f0", ring:"#4f6ef7"},
+  {id:"dark",   label:"Dark",   emoji:"🌙", dot:"#1a1a24", ring:"#c8f565"},
+  {id:"ocean",  label:"Ocean",  emoji:"🌊", dot:"#0d2040", ring:"#38bdf8"},
+  {id:"sakura", label:"Sakura", emoji:"🌸", dot:"#fdf0f3", ring:"#e11d48"},
+  {id:"forest", label:"Forest", emoji:"🌿", dot:"#101e10", ring:"#4ade80"},
 ];
 
-/* ════════ HELPERS ════════ */
+const WORD_TAGS=[
+  {id:"",       label:"No tag",   dot:"var(--border-strong)", dotBg:"var(--surface2)"},
+  {id:"red",    label:"Hard 🔴",   dot:"#ef4444",              dotBg:"rgba(239,68,68,.22)"},
+  {id:"yellow", label:"Review 🟡", dot:"#f59e0b",              dotBg:"rgba(245,158,11,.22)"},
+  {id:"green",  label:"Learned ✅",dot:"#22c55e",              dotBg:"rgba(34,197,94,.22)"},
+  {id:"blue",   label:"New 🔵",    dot:"#3b82f6",              dotBg:"rgba(59,130,246,.22)"},
+];
+
+/* ──────── HELPERS ──────── */
 function safeParse(t){
-  try{t=(t||"").replace(/```json|```/g,"");return JSON.parse(t);}
+  try{t=(t||"").replace(/```json|```/g,"").trim();return JSON.parse(t);}
   catch{return{score:"?",meaning_status:"Error",errors:String(t)};}
 }
 function formatErrors(err){
   if(!err)return[];
   return String(err).split(/[\n,.]/).map(x=>x.trim()).filter(Boolean);
 }
-function uid(){return Date.now()+Math.random().toString(36).slice(2);}
+function uid(){return Date.now()+Math.random().toString(36).slice(2,7);}
+function getDaysUntil(ds){
+  if(!ds)return null;
+  const t=new Date(ds),n=new Date();
+  t.setHours(0,0,0,0);n.setHours(0,0,0,0);
+  return Math.round((t-n)/86400000);
+}
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
 
-const API_KEY="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";
+/* ──────── API KEY ──────── */
+function getApiKey(){return localStorage.getItem("vam_groq_key")||"";}
+function saveApiKey(k){localStorage.setItem("vam_groq_key",k.trim());}
 
-/* ════════ LOAD STATE ════════ */
+/* ──────── SPEECH ──────── */
+function speak(word){
+  if(!word||!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(word.trim());
+  u.lang="en-US";u.rate=0.88;
+  window.speechSynthesis.speak(u);
+}
+
+/* ──────── LOAD / SAVE ──────── */
 function loadState(){
-  let files,library,activeId,theme;
+  let files,library,activeId,theme,examDate;
   try{files=JSON.parse(localStorage.getItem("vam_files")||"null");}catch{}
   try{library=JSON.parse(localStorage.getItem("vam_library")||"[]");}catch{}
   try{activeId=localStorage.getItem("vam_active");}catch{}
   try{theme=localStorage.getItem("vam_theme")||"light";}catch{theme="light";}
+  try{examDate=localStorage.getItem("vam_examdate")||"";}catch{examDate="";}
   if(!Array.isArray(files)||files.length===0){
-    const id=uid();
-    files=[{id,name:"IELTS Vocab",rows:[]}];
-    activeId=id;
+    const id=uid();files=[{id,name:"IELTS Vocab",rows:[]}];activeId=id;
   }
-  return{files,library:Array.isArray(library)?library:[],activeId:activeId||files[0].id,theme};
+  files=files.map(f=>({...f,rows:(f.rows||[]).map(r=>({tag:"",revealed:false,...r}))}));
+  return{files,library:Array.isArray(library)?library:[],
+    activeId:activeId||files[0].id,theme,examDate};
 }
 
-/* ════════ FEEDBACK ════════ */
+/* ════════════════════════════════════
+   FEEDBACK
+════════════════════════════════════ */
 function Feedback({fb}){
   if(!fb)return null;
-  const errors=formatErrors(fb.errors);
-  return e("div",{className:"mt-2 rounded-xl p-3 text-xs",style:{
-    background:"var(--fb-bg)",border:"1.5px solid var(--fb-border)",display:"flex",
-    flexDirection:"column",gap:6
+  const errs=formatErrors(fb.errors);
+  return e("div",{style:{
+    marginTop:8,borderRadius:12,padding:"10px 13px",fontSize:12,
+    background:"var(--fb-bg)",border:"1.5px solid var(--fb-border)",
+    display:"flex",flexDirection:"column",gap:6
   }},
     e("div",{style:{display:"flex",justifyContent:"space-between",paddingBottom:6,
       borderBottom:"1px solid var(--fb-border)"}},
-      e("span",{style:{color:"var(--text-muted)",fontSize:10,fontWeight:600,
-        letterSpacing:"0.08em",textTransform:"uppercase",fontFamily:"'DM Mono',monospace"}},"AI Review"),
+      e("span",{style:{color:"var(--text-muted)",fontSize:10,fontWeight:700,
+        letterSpacing:".08em",textTransform:"uppercase",
+        fontFamily:"'Be Vietnam Pro',sans-serif"}},"AI Review"),
       e("span",{className:"score-badge"},fb.score||"?")
     ),
-    e("div",{style:{
-      color:fb.meaning_status==="Correct"?"var(--green)":"var(--danger)",fontWeight:600
-    }},fb.meaning_status||""),
-    errors.length>0&&e("ul",{style:{
+    fb.meaning_status&&e("div",{style:{
+      color:fb.meaning_status==="Correct"?"var(--green)":"var(--danger)",
+      fontWeight:700,fontSize:14,fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:1.5
+    }},fb.meaning_status==="Correct"?"✅ Correct":"❌ "+fb.meaning_status),
+    errs.length>0&&e("ul",{style:{
       background:"var(--danger-bg)",border:"1px solid var(--danger-border)",
-      borderRadius:8,padding:"6px 10px",color:"var(--danger)",
-      listStyleType:"disc",listStylePosition:"inside",margin:0
-    }},errors.slice(0,3).map((er,i)=>e("li",{key:i},er))),
+      borderRadius:8,padding:"6px 12px",color:"var(--danger)",
+      listStyleType:"disc",listStylePosition:"inside",
+      fontFamily:"'Be Vietnam Pro',sans-serif",fontSize:13,lineHeight:1.6
+    }},errs.slice(0,3).map((er,i)=>e("li",{key:i},er))),
     fb.improved&&e("div",{style:{
       background:"var(--accent-light)",border:"1px solid var(--accent-border)",
-      borderRadius:8,padding:"6px 10px",color:"var(--accent)",
-      fontFamily:"'DM Mono',monospace",fontStyle:"italic"
+      borderRadius:8,padding:"7px 12px",color:"var(--accent)",
+      fontFamily:"'Be Vietnam Pro',sans-serif",fontStyle:"italic",
+      fontSize:13,lineHeight:1.5,fontWeight:500
     }},"→ "+fb.improved)
   );
 }
 
-/* ════════ THEME PANEL ════════ */
-function ThemePanel({current,onChange,onClose}){
+/* ════════════════════════════════════
+   SETTINGS PANEL (Theme + API Key)
+════════════════════════════════════ */
+function SettingsPanel({current,onChange,onClose}){
+  const [tab,setTab]=useState("theme");
+  const [key,setKey]=useState(getApiKey());
+  const [saved,setSaved]=useState(false);
+
+  function handleSaveKey(){
+    saveApiKey(key);
+    setSaved(true);
+    setTimeout(()=>setSaved(false),2200);
+  }
+
+  const hasKey=getApiKey().length>10;
+
   return e("div",{className:"overlay",onClick:onClose},
     e("div",{className:"modal",onClick:ev=>ev.stopPropagation()},
-      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:20}},
+      /* Header */
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},
         e("div",null,
-          e("h3",{style:{fontSize:20,fontWeight:900,color:"var(--accent)",margin:0}},"🎨 Appearance"),
-          e("p",{style:{fontSize:12,color:"var(--text-muted)",margin:"4px 0 0"}},"Choose your preferred theme")
+          e("h3",{style:{fontSize:20,fontWeight:900,color:"var(--accent)",margin:0}},"⚙️ Settings"),
+          e("p",{style:{fontSize:12,color:"var(--text-muted)",marginTop:3}},"Appearance & API configuration")
         ),
         e("button",{onClick:onClose,style:{
           background:"none",border:"none",color:"var(--text-muted)",
-          fontSize:24,cursor:"pointer",lineHeight:1,padding:4
+          fontSize:24,cursor:"pointer",lineHeight:1,padding:4,borderRadius:8,
+          transition:"color .15s"
         }},"×")
       ),
-      e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+      /* Tabs */
+      e("div",{style:{
+        display:"flex",gap:4,background:"var(--surface2)",
+        borderRadius:10,padding:4,marginBottom:18
+      }},
+        e("button",{className:"stab"+(tab==="theme"?" active":""),
+          style:{flex:1},onClick:()=>setTab("theme")},"🎨 Appearance"),
+        e("button",{className:"stab"+(tab==="key"?" active":""),
+          style:{flex:1,display:"flex",alignItems:"center",gap:6,justifyContent:"center"},
+          onClick:()=>setTab("key")},
+          "🔑 API Key",
+          e("span",{className:"key-status "+(hasKey?"key-ok":"key-missing"),
+            style:{fontSize:9,padding:"1px 6px"}},hasKey?"OK":"!")
+        )
+      ),
+
+      /* TAB: Theme */
+      tab==="theme"&&e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
         THEMES.map(th=>{
-          const active=current===th.id;
-          return e("button",{
-            key:th.id,onClick:()=>{onChange(th.id);onClose();},
-            style:{
-              display:"flex",alignItems:"center",gap:14,
-              padding:"12px 16px",borderRadius:14,cursor:"pointer",width:"100%",
-              textAlign:"left",fontFamily:"'Syne',sans-serif",
-              background:active?"var(--accent-light)":"var(--surface2)",
-              border:active?"1.5px solid var(--accent)":"1.5px solid var(--border)",
-              transition:"all .16s",
-            }
-          },
+          const act=current===th.id;
+          return e("button",{key:th.id,onClick:()=>{onChange(th.id);},style:{
+            display:"flex",alignItems:"center",gap:14,padding:"12px 16px",
+            borderRadius:14,cursor:"pointer",width:"100%",textAlign:"left",
+            fontFamily:"'Syne',sans-serif",
+            background:act?"var(--accent-light)":"var(--surface2)",
+            border:act?"1.5px solid var(--accent)":"1.5px solid var(--border)",
+            transition:"all .16s"
+          }},
             e("span",{style:{
               width:24,height:24,borderRadius:"50%",flexShrink:0,
               background:th.dot,border:"2.5px solid "+th.ring,
-              boxShadow:active?"0 0 0 3px var(--accent-light)":"none",
+              boxShadow:act?"0 0 0 3px var(--accent-light)":"none",
               display:"inline-block",transition:"box-shadow .2s"
             }}),
             e("div",{style:{flex:1}},
-              e("div",{style:{
-                fontWeight:700,fontSize:14,
-                color:active?"var(--accent)":"var(--text)"
-              }},th.emoji+" "+th.label)
+              e("div",{style:{fontWeight:700,fontSize:14,color:act?"var(--accent)":"var(--text)"}},th.emoji+" "+th.label)
             ),
-            active&&e("span",{style:{
-              fontSize:11,color:"var(--accent)",fontFamily:"'DM Mono',monospace",
+            act&&e("span",{style:{
+              fontSize:11,color:"var(--accent)",fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,
               background:"var(--accent-light)",padding:"2px 8px",borderRadius:6,
               border:"1px solid var(--accent-border)"
             }},"active")
           );
         })
+      ),
+
+      /* TAB: API Key */
+      tab==="key"&&e("div",{style:{display:"flex",flexDirection:"column",gap:14}},
+        e("div",{style:{
+          background:"var(--yellow-bg)",border:"1px solid var(--yellow-border)",
+          borderRadius:10,padding:"10px 13px",fontSize:13,color:"var(--yellow)",
+          fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:1.5
+        }},
+          "⚠️ API key chỉ lưu trong localStorage của trình duyệt. Không chia sẻ với người khác."
+        ),
+        e("div",null,
+          e("label",{style:{
+            display:"block",fontSize:12,fontWeight:700,fontFamily:"'Be Vietnam Pro',sans-serif",
+            color:"var(--text-muted)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:6
+          }},"Groq API Key"),
+          e("input",{className:"inp",type:"password",
+            placeholder:"gsk_••••••••••••••••••••••",
+            value:key,onChange:ev=>setKey(ev.target.value),
+            style:{fontFamily:"'Be Vietnam Pro',sans-serif",letterSpacing:".04em"}
+          })
+        ),
+        e("div",{style:{display:"flex",gap:8,alignItems:"center"}},
+          e("button",{className:"btn btn-accent",style:{flex:1},onClick:handleSaveKey},"💾 Save key"),
+          key&&e("button",{className:"btn btn-danger",style:{padding:"9px 14px"},
+            onClick:()=>{setKey("");saveApiKey("");}
+          },"✕ Xoá"),
+        ),
+        saved&&e("div",{style:{
+          background:"var(--green-bg)",border:"1px solid var(--green-border)",
+          borderRadius:8,padding:"7px 12px",fontSize:13,color:"var(--green)",fontWeight:700,
+          fontFamily:"'Be Vietnam Pro',sans-serif"
+        }},"✅ Key đã lưu thành công!"),
+        !hasKey&&e("p",{style:{
+          fontSize:12,color:"var(--text-muted)",fontFamily:"'Be Vietnam Pro',sans-serif",
+          lineHeight:1.6
+        }},"Lấy API key miễn phí tại console.groq.com → API Keys")
       )
     )
   );
 }
 
-/* ════════ NEW FILE MODAL ════════ */
+/* ════════════════════════════════════
+   NEW FILE MODAL
+════════════════════════════════════ */
 function NewFileModal({onConfirm,onCancel}){
   const [name,setName]=useState("");
   const ref=useRef(null);
-  useEffect(()=>{setTimeout(()=>ref.current?.focus(),50);},[]);
-  const confirm=()=>{if(name.trim())onConfirm(name.trim());};
+  useEffect(()=>{setTimeout(()=>ref.current?.focus(),60);},[]);
   return e("div",{className:"overlay"},
     e("div",{className:"modal"},
-      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:16,marginTop:0}},"✦ New File"),
+      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:16}},"✦ New File"),
       e("input",{ref,className:"inp",style:{marginBottom:16},
-        placeholder:"e.g. IELTS Writing, Daily Chat…",
-        value:name,onChange:ev=>setName(ev.target.value),
-        onKeyDown:ev=>{if(ev.key==="Enter")confirm();if(ev.key==="Escape")onCancel();}
-      }),
+        placeholder:"e.g. IELTS Writing, Daily Chat…",value:name,
+        onChange:ev=>setName(ev.target.value),
+        onKeyDown:ev=>{if(ev.key==="Enter"&&name.trim())onConfirm(name.trim());if(ev.key==="Escape")onCancel();}}),
       e("div",{style:{display:"flex",gap:8,justifyContent:"flex-end"}},
         e("button",{className:"btn btn-ghost",onClick:onCancel},"Cancel"),
-        e("button",{className:"btn btn-accent",onClick:confirm,disabled:!name.trim()},"Create")
+        e("button",{className:"btn btn-accent",onClick:()=>name.trim()&&onConfirm(name.trim()),disabled:!name.trim()},"Create")
       )
     )
   );
 }
 
-/* ════════ IMPORT MODAL ════════ */
+/* ════════════════════════════════════
+   IMPORT MODAL
+════════════════════════════════════ */
 function ImportModal({onImport,onCancel}){
   const [err,setErr]=useState("");
   const handleFile=ev=>{
@@ -435,7 +808,7 @@ function ImportModal({onImport,onCancel}){
   };
   return e("div",{className:"overlay"},
     e("div",{className:"modal"},
-      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:6,marginTop:0}},"⬆ Import JSON"),
+      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:6}},"⬆ Import JSON"),
       e("p",{style:{fontSize:13,color:"var(--text-muted)",marginBottom:14}},"Select a previously exported vocab.json file."),
       e("input",{type:"file",accept:".json",className:"inp",style:{marginBottom:8},onChange:handleFile}),
       err&&e("p",{style:{color:"var(--danger)",fontSize:13,marginBottom:8}},err),
@@ -446,18 +819,157 @@ function ImportModal({onImport,onCancel}){
   );
 }
 
-/* ════════ MAIN APP ════════ */
+/* ════════════════════════════════════
+   TAG MENU
+════════════════════════════════════ */
+function TagMenu({currentTag,onChange,onClose}){
+  const ref=useRef(null);
+  useEffect(()=>{
+    const fn=ev=>{if(ref.current&&!ref.current.contains(ev.target))onClose();};
+    document.addEventListener("mousedown",fn);
+    return()=>document.removeEventListener("mousedown",fn);
+  },[onClose]);
+  return e("div",{ref,className:"tag-menu"},
+    WORD_TAGS.map(t=>e("button",{
+      key:t.id,className:"tag-menu-item"+(currentTag===t.id?" sel":""),
+      onClick:()=>{onChange(t.id);onClose();}
+    },
+      e("span",{className:"tag-dot",style:{background:t.dotBg,border:"2px solid "+t.dot}}),
+      t.label
+    ))
+  );
+}
+
+/* ════════════════════════════════════
+   EXAM COUNTDOWN
+════════════════════════════════════ */
+function ExamCountdown({examDate,onChange}){
+  const days=getDaysUntil(examDate);
+  let num="—",lbl="set a date",color="var(--text-faint)";
+  if(days!==null){
+    if(days<0){num=Math.abs(days);lbl="days ago";color="var(--danger)";}
+    else if(days===0){num="🎯";lbl="Today!";color="var(--yellow)";}
+    else if(days<=7){num=days;lbl="days left";color="var(--yellow)";}
+    else{num=days;lbl="days left";color="var(--accent)";}
+  }
+  return e("div",{className:"countdown-box"},
+    e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:7}},
+      e("span",{style:{fontSize:11,fontFamily:"'Be Vietnam Pro',sans-serif",letterSpacing:".05em",
+        textTransform:"uppercase",color:"var(--sidebar-text-muted)",fontWeight:700}},"📅 Exam Date"),
+    ),
+    e("input",{type:"date",className:"inp",
+      style:{fontSize:13,padding:"7px 10px",marginBottom:days!==null?8:0},
+      value:examDate,onChange:ev=>onChange(ev.target.value)
+    }),
+    days!==null&&e("div",{style:{display:"flex",alignItems:"flex-end",gap:6}},
+      e("div",{className:"cd-num",style:{color}},num),
+      e("div",{className:"cd-lbl"},lbl)
+    )
+  );
+}
+
+/* ════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════ */
+function Sidebar({
+  files,activeId,selected,showLibrary,library,examDate,open,isMobile,
+  onSwitch,onToggleSelect,onAddNew,onDeleteSelected,onClearAll,
+  onToggleLibrary,onExamDateChange,onClose
+}){
+  const totalWords=files.reduce((a,f)=>a+(f.rows?.length||0),0);
+  return e(React.Fragment,null,
+    isMobile&&open&&e("div",{className:"sidebar-overlay",onClick:onClose}),
+    e("div",{className:"sidebar"+(open?" open":"")},
+      e("div",{className:"sb-section",style:{paddingTop:12}},`Files · ${files.length}`),
+      e("div",{className:"sidebar-file-list"},
+        files.map(f=>{
+          const isActive=f.id===activeId&&!showLibrary;
+          const isSel=selected.has(f.id);
+          return e("div",{key:f.id,
+            className:"sidebar-file-item"+(isActive?" active":""),
+            onClick:()=>{onSwitch(f.id);if(isMobile)onClose();}
+          },
+            e("div",{className:"cb"+(isSel?" on":""),
+              onClick:ev=>{ev.stopPropagation();onToggleSelect(f.id);}
+            },"✓"),
+            e("span",{className:"file-label",title:f.name},f.name),
+            e("span",{className:"file-count"},(f.rows?.length||0)+"w")
+          );
+        })
+      ),
+      e("div",{style:{padding:"6px 10px",display:"flex",gap:5}},
+        e("button",{className:"btn btn-accent",
+          style:{fontSize:13,padding:"8px 12px",flex:1},onClick:onAddNew},"＋ New"),
+        e("button",{className:"btn btn-danger",
+          style:{fontSize:13,padding:"8px 12px"},
+          title:"Delete selected",disabled:selected.size===0,onClick:onDeleteSelected},"🗑"),
+        e("button",{className:"btn btn-ghost",
+          style:{fontSize:13,padding:"8px 12px"},
+          title:"Clear all",onClick:onClearAll},"⬜")
+      ),
+      e("div",{className:"sb-divider"}),
+      e("div",{style:{padding:"6px 10px 6px"}},
+        e("button",{
+          className:"btn "+(showLibrary?"btn-accent":"btn-ghost"),
+          style:{width:"100%",fontSize:13,justifyContent:"space-between"},
+          onClick:()=>{onToggleLibrary();if(isMobile)onClose();}
+        },
+          e("span",{},"📚 Library"),
+          e("span",{style:{
+            fontSize:11,fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,
+            background:"var(--accent-light)",color:"var(--accent)",
+            padding:"2px 8px",borderRadius:5,border:"1px solid var(--accent-border)"
+          }},library.length)
+        )
+      ),
+      e("div",{className:"sb-divider"}),
+      e(ExamCountdown,{examDate,onChange:onExamDateChange}),
+      e("div",{style:{
+        padding:"10px 14px 12px",fontSize:13,
+        fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:600,
+        color:"var(--sidebar-text-muted)",display:"flex",justifyContent:"space-between",
+        alignItems:"center"
+      }},
+        e("span",{},"Total words"),
+        e("span",{style:{
+          color:"var(--accent)",fontWeight:800,fontSize:15,
+          background:"var(--accent-light)",padding:"2px 10px",
+          borderRadius:8,border:"1px solid var(--accent-border)"
+        }},totalWords)
+      )
+    )
+  );
+}
+
+/* ════════════════════════════════════
+   APP
+════════════════════════════════════ */
 function App(){
   const init=loadState();
   const [files,setFiles]=useState(init.files);
   const [library,setLibrary]=useState(init.library);
   const [activeId,setActiveId]=useState(init.activeId);
   const [theme,setTheme]=useState(init.theme);
+  const [selected,setSelected]=useState(new Set());
   const [showNewFile,setShowNewFile]=useState(false);
   const [showImport,setShowImport]=useState(false);
   const [showLibrary,setShowLibrary]=useState(false);
-  const [showTheme,setShowTheme]=useState(false);
+  const [showSettings,setShowSettings]=useState(false);
+  const [flashcard,setFlashcard]=useState(false);
+  const [examDate,setExamDate]=useState(init.examDate);
   const [transKey,setTransKey]=useState(0);
+  const [isMobile,setIsMobile]=useState(window.innerWidth<768);
+  const [sidebarOpen,setSidebarOpen]=useState(window.innerWidth>=768);
+
+  useEffect(()=>{
+    const handler=()=>{
+      const mob=window.innerWidth<768;
+      setIsMobile(mob);
+      if(!mob)setSidebarOpen(true);
+    };
+    window.addEventListener("resize",handler);
+    return()=>window.removeEventListener("resize",handler);
+  },[]);
 
   useEffect(()=>localStorage.setItem("vam_files",JSON.stringify(files)),[files]);
   useEffect(()=>localStorage.setItem("vam_library",JSON.stringify(library)),[library]);
@@ -466,6 +978,7 @@ function App(){
     localStorage.setItem("vam_theme",theme);
     document.documentElement.setAttribute("data-theme",theme);
   },[theme]);
+  useEffect(()=>localStorage.setItem("vam_examdate",examDate),[examDate]);
   useEffect(()=>{document.documentElement.setAttribute("data-theme",init.theme);},[]);
 
   const activeFile=files.find(f=>f.id===activeId)||files[0];
@@ -478,42 +991,73 @@ function App(){
     }));
   },[activeId]);
 
-  function switchFile(id){setActiveId(id);setTransKey(k=>k+1);}
+  function switchFile(id){setActiveId(id);setShowLibrary(false);setTransKey(k=>k+1);}
+  function toggleSelect(id){setSelected(s=>{const n=new Set(s);n.has(id)?n.delete(id):n.add(id);return n;});}
   function createFile(name){
     const id=uid();
     setFiles(fs=>[...fs,{id,name,rows:[]}]);
     setShowNewFile(false);switchFile(id);
   }
-  function deleteFile(id){
-    if(files.length===1){alert("Cannot delete the last file.");return;}
-    if(!confirm("Delete this file and all its words?"))return;
+  function deleteSelected(){
+    if(selected.size===0)return;
+    if(files.length<=selected.size){alert("Cannot delete all files. Keep at least one.");return;}
+    if(!confirm(`Delete ${selected.size} selected file(s) and all their words?`))return;
     setFiles(fs=>{
-      const next=fs.filter(f=>f.id!==id);
-      if(activeId===id)setActiveId(next[0].id);
+      const next=fs.filter(f=>!selected.has(f.id));
+      if(selected.has(activeId)){
+        const idx=fs.findIndex(f=>f.id===activeId);
+        setActiveId(next[Math.min(idx,next.length-1)].id);
+      }
       return next;
     });
+    setSelected(new Set());setTransKey(k=>k+1);
+  }
+  function clearAll(){
+    if(!confirm("⚠️ This will DELETE all files and words. Continue?"))return;
+    const id=uid();
+    setFiles([{id,name:"IELTS Vocab",rows:[]}]);
+    setActiveId(id);setSelected(new Set());setTransKey(k=>k+1);
   }
 
-  const addRow=()=>setRows(r=>[...r,{id:uid(),word:"",meaning:"",example:"",feedback:null,loading:false}]);
+  const addRow=()=>setRows(r=>[...r,{id:uid(),word:"",meaning:"",example:"",tag:"",feedback:null,loading:false,revealed:false}]);
   const update=(i,field,val)=>setRows(r=>{const c=[...r];c[i]={...c[i],[field]:val};return c;});
   const del=i=>setRows(r=>r.filter((_,idx)=>idx!==i));
   const clearField=field=>setRows(r=>r.map(x=>({...x,[field]:field==="feedback"?null:""})));
+  const toggleReveal=i=>setRows(r=>{const c=[...r];c[i]={...c[i],revealed:!c[i].revealed};return c;});
+  function clearAllWords(){
+    if(rows.length===0)return;
+    if(!confirm(`🗑 Xoá tất cả ${rows.length} từ trong file "${activeFile?.name}"?`))return;
+    setRows(()=>[]);
+  }
 
   function saveToLibrary(i){
     const item=rows[i];if(!item||!item.word)return;
-    setLibrary(lib=>[{...item,id:uid(),fileId:activeId,fileName:activeFile.name},...lib]);
+    setLibrary(lib=>[{...item,id:uid(),fileId:activeId,fileName:activeFile?.name},...lib]);
     del(i);
+  }
+  function archiveAllCorrect(){
+    const correct=rows.filter(r=>r.feedback?.meaning_status==="Correct"&&r.word);
+    if(correct.length===0){alert("No words with 'Correct' AI feedback found.");return;}
+    if(!confirm(`Archive ${correct.length} correct word(s) to Library?`))return;
+    const correctIds=new Set(correct.map(r=>r.id));
+    setLibrary(lib=>[
+      ...correct.map(r=>({...r,id:uid(),fileId:activeId,fileName:activeFile?.name})),
+      ...lib
+    ]);
+    setRows(r=>r.filter(x=>!correctIds.has(x.id)));
   }
   const removeFromLibrary=id=>setLibrary(lib=>lib.filter(x=>x.id!==id));
 
   async function check(i){
+    const apiKey=getApiKey();
+    if(!apiKey){alert("Please set your Groq API key in Settings (⚙️).");setShowSettings(true);return;}
     setRows(r=>{const c=[...r];c[i]={...c[i],loading:true};return c;});
     try{
       const row=rows[i];
       if(!row.word||!row.example)throw"Missing word or example";
       const res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
         method:"POST",
-        headers:{"Authorization":"Bearer "+API_KEY,"Content-Type":"application/json"},
+        headers:{"Authorization":"Bearer "+apiKey,"Content-Type":"application/json"},
         body:JSON.stringify({
           model:"llama-3.3-70b-versatile",
           messages:[
@@ -529,10 +1073,10 @@ function App(){
       setRows(r=>{const c=[...r];c[i]={...c[i],feedback:{errors:String(ex)},loading:false};return c;});
     }
   }
-  const checkAll=()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*280));
+  const checkAll=()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*300));
 
   function exportJSON(){
-    const data={version:1,exportedAt:new Date().toISOString(),files,library};
+    const data={version:2,exportedAt:new Date().toISOString(),files,library};
     const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");a.href=url;a.download="vocab_backup.json";a.click();
@@ -540,194 +1084,338 @@ function App(){
   }
   function doImport(data){
     if(!confirm("This will REPLACE all current data. Continue?"))return;
-    setFiles(data.files||[]);setLibrary(data.library||[]);
-    setActiveId((data.files||[])[0]?.id||"");
+    const fs=(data.files||[]).map(f=>({
+      ...f,rows:(f.rows||[]).map(r=>({tag:"",revealed:false,...r}))
+    }));
+    setFiles(fs);setLibrary(data.library||[]);
+    setActiveId(fs[0]?.id||"");
     setShowImport(false);setTransKey(k=>k+1);
   }
 
   const curTheme=THEMES.find(t=>t.id===theme)||THEMES[0];
+  const hasKey=getApiKey().length>10;
 
-  return e("div",{style:{minHeight:"100vh",display:"flex",flexDirection:"column"}},
+  return e("div",{className:"app-shell"},
 
-    /* ── HEADER ── */
+    /* ───── HEADER ───── */
     e("header",{style:{
-      position:"sticky",top:0,zIndex:50,
-      background:"var(--bg-header)",borderBottom:"1px solid var(--border)",
-      padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",
-      gap:8,boxShadow:"0 1px 12px var(--shadow)",transition:"background .3s"
+      height:54,flexShrink:0,zIndex:50,
+      background:"var(--bg-header)",borderBottom:"1.5px solid var(--border)",
+      padding:"0 16px",display:"flex",alignItems:"center",
+      justifyContent:"space-between",gap:8,
+      boxShadow:"var(--shadow-header)",transition:"background .35s"
     }},
-      e("div",{style:{display:"flex",alignItems:"center",gap:6}},
-        e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--accent)"}},"VOCAB"),
-        e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--text)"}},"AI"),
-        e("span",{className:"tag",style:{
-          background:"var(--accent-light)",color:"var(--accent)",
-          border:"1px solid var(--accent-border)",marginLeft:4
-        }},"MULTI")
+      /* Left: hamburger + logo */
+      e("div",{style:{display:"flex",alignItems:"center",gap:10}},
+        e("button",{className:"hamburger hide-desktop",
+          onClick:()=>setSidebarOpen(v=>!v)},
+          e("span"),e("span"),e("span")
+        ),
+        e("div",{style:{display:"flex",alignItems:"center",gap:6}},
+          e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--accent)"}},"VOCAB"),
+          e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--text)"}}," AI"),
+          e("span",{className:"tag",style:{
+            background:"var(--accent-light)",color:"var(--accent)",
+            border:"1px solid var(--accent-border)",marginLeft:4,fontSize:11,
+            fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700
+          }},"MULTI")
+        )
       ),
-      e("div",{style:{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap",justifyContent:"flex-end"}},
-        /* Theme button */
+      /* Right: actions */
+      e("div",{style:{display:"flex",gap:6,alignItems:"center"}},
+        e("button",{
+          className:"btn "+(flashcard?"btn-accent":"btn-yellow"),
+          style:{fontSize:12,padding:"7px 12px"},
+          onClick:()=>setFlashcard(v=>!v)
+        },flashcard?"Exit FC":"🃏 Flashcard"),
         e("button",{
           className:"btn btn-ghost",
-          style:{fontSize:12,padding:"7px 12px",gap:7},
-          onClick:()=>setShowTheme(true)
+          style:{fontSize:12,padding:"7px 11px",gap:6,position:"relative"},
+          onClick:()=>setShowSettings(true)
         },
           e("span",{style:{
-            width:13,height:13,borderRadius:"50%",flexShrink:0,display:"inline-block",
+            width:12,height:12,borderRadius:"50%",display:"inline-block",flexShrink:0,
             background:curTheme.dot,border:"2px solid "+curTheme.ring
           }}),
-          curTheme.emoji," Theme"
+          e("span",{className:"hide-mobile"},curTheme.emoji),
+          !hasKey&&e("span",{style:{
+            position:"absolute",top:-3,right:-3,
+            width:8,height:8,borderRadius:"50%",
+            background:"var(--danger)",border:"1.5px solid var(--bg-header)"
+          }})
         ),
-        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},
-          onClick:()=>setShowLibrary(v=>!v)
-        }, showLibrary?"← Back":`📚 ${library.length}`),
-        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},onClick:exportJSON},"⬇ Export"),
-        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},onClick:()=>setShowImport(true)},"⬆ Import")
+        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 11px"},
+          title:"Export JSON",onClick:exportJSON},"⬇"),
+        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 11px"},
+          title:"Import JSON",onClick:()=>setShowImport(true)},"⬆")
       )
     ),
 
-    /* ── FILE TABS ── */
-    !showLibrary&&e("div",{style:{
-      background:"var(--bg-header)",borderBottom:"1px solid var(--border)",
-      padding:"8px 16px",overflowX:"auto",transition:"background .3s"
-    }},
-      e("div",{style:{display:"flex",gap:8,alignItems:"center",minWidth:"max-content"}},
-        ...files.map(f=>
-          e("div",{key:f.id,style:{display:"flex",alignItems:"center",gap:3}},
-            e("button",{
-              className:"file-tab"+(f.id===activeId?" active":""),
-              title:f.name,onClick:()=>switchFile(f.id)
-            },f.name),
-            files.length>1&&e("button",{
-              style:{background:"none",border:"none",color:"var(--text-faint)",
-                fontSize:16,cursor:"pointer",padding:"0 3px",lineHeight:1,transition:"color .15s"},
-              onMouseEnter:ev=>ev.target.style.color="var(--danger)",
-              onMouseLeave:ev=>ev.target.style.color="var(--text-faint)",
-              onClick:()=>deleteFile(f.id),title:"Delete"
-            },"×")
-          )
-        ),
-        e("button",{
-          className:"btn btn-ghost",style:{fontSize:12,padding:"6px 12px",marginLeft:4},
-          onClick:()=>setShowNewFile(true)
-        },"＋ New File")
+    /* ───── BODY ───── */
+    e("div",{className:"app-body"},
+      e(Sidebar,{
+        files,activeId,selected,showLibrary,library,examDate,
+        open:sidebarOpen,isMobile,
+        onSwitch:switchFile,
+        onToggleSelect:toggleSelect,
+        onAddNew:()=>setShowNewFile(true),
+        onDeleteSelected:deleteSelected,
+        onClearAll:clearAll,
+        onToggleLibrary:()=>setShowLibrary(v=>!v),
+        onExamDateChange:setExamDate,
+        onClose:()=>setSidebarOpen(false)
+      }),
+
+      e("div",{className:"content-area"},
+        showLibrary
+          ?e(LibraryView,{key:"lib",library,removeFromLibrary})
+          :e(FileView,{
+              key:transKey,file:activeFile,rows,update,del,check,checkAll,
+              addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal
+            })
       )
     ),
 
-    /* ── MAIN ── */
-    e("main",{style:{flex:1,padding:"20px 16px",maxWidth:1100,margin:"0 auto",width:"100%"}},
-      showLibrary
-        ?e(LibraryView,{key:"lib",library,removeFromLibrary})
-        :e(FileView,{key:transKey,file:activeFile,rows,update,del,check,checkAll,addRow,saveToLibrary,clearField})
-    ),
-
-    /* ── MODALS ── */
-    showTheme&&e(ThemePanel,{current:theme,onChange:setTheme,onClose:()=>setShowTheme(false)}),
+    /* ───── MODALS ───── */
+    showSettings&&e(SettingsPanel,{current:theme,onChange:setTheme,onClose:()=>setShowSettings(false)}),
     showNewFile&&e(NewFileModal,{onConfirm:createFile,onCancel:()=>setShowNewFile(false)}),
     showImport&&e(ImportModal,{onImport:doImport,onCancel:()=>setShowImport(false)})
   );
 }
 
-/* ════════ LIBRARY VIEW ════════ */
+/* ════════════════════════════════════
+   LIBRARY VIEW
+════════════════════════════════════ */
 function LibraryView({library,removeFromLibrary}){
-  return e("div",{className:"fade-in"},
-    e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}},
-      e("h2",{style:{fontSize:22,fontWeight:900,color:"var(--accent)",margin:0}},"📚 Library"),
-      e("span",{className:"tag",style:{
-        background:"var(--accent-light)",color:"var(--accent)",border:"1px solid var(--accent-border)"
-      }},library.length+" words")
-    ),
-    library.length===0
-      ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
-          e("p",{style:{fontSize:40,marginBottom:12}},"✦"),
-          e("p",{},"No saved words yet. Star a word to save it here.")
-        )
-      :e("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12}},
-          library.map(item=>
-            e("div",{key:item.id,className:"lib-card"},
-              e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}},
-                e("div",null,
-                  e("div",{style:{fontWeight:700,fontSize:15,color:"var(--text)"}},item.word),
-                  item.fileName&&e("div",{style:{
-                    fontSize:10,fontFamily:"'DM Mono',monospace",color:"var(--text-muted)",marginTop:2
-                  }},"from: "+item.fileName)
-                ),
-                e("button",{
-                  style:{background:"none",border:"none",color:"var(--text-faint)",
-                    fontSize:20,cursor:"pointer",lineHeight:1,transition:"color .15s"},
-                  onMouseEnter:ev=>ev.target.style.color="var(--danger)",
-                  onMouseLeave:ev=>ev.target.style.color="var(--text-faint)",
-                  onClick:()=>removeFromLibrary(item.id)
-                },"×")
-              ),
-              item.meaning&&e("div",{style:{color:"var(--purple)",fontSize:13,marginTop:4}},item.meaning),
-              item.example&&e("div",{style:{
-                color:"var(--text-muted)",fontSize:12,fontStyle:"italic",
-                marginTop:4,fontFamily:"'DM Mono',monospace"
-              }},'"'+item.example+'"'),
-              item.feedback&&e(Feedback,{fb:item.feedback})
+  return e("div",{className:"content-scroll"},
+    e("div",{className:"content-inner",style:{paddingTop:20}},
+      e("div",{className:"fade-in"},
+        e("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
+          e("h2",{style:{fontSize:22,fontWeight:900,color:"var(--accent)",margin:0}},"📚 Library"),
+          e("span",{className:"tag",style:{
+            background:"var(--accent-light)",color:"var(--accent)",border:"1px solid var(--accent-border)"
+          }},library.length+" words")
+        ),
+        library.length===0
+          ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
+              e("p",{style:{fontSize:40,marginBottom:12}},"✦"),
+              e("p",{},"No saved words yet. Star a word to save it here.")
             )
-          )
-        )
+          :e("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12}},
+              library.map(item=>
+                e("div",{key:item.id,className:"lib-card"},
+                  e("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:4}},
+                    e("div",{style:{flex:1}},
+                      e("div",{style:{display:"flex",alignItems:"center",gap:5}},
+                        e("div",{style:{fontWeight:800,fontSize:15,color:"var(--text)"}},item.word),
+                        e("button",{className:"icon-btn",style:{fontSize:16},
+                          onClick:()=>speak(item.word),title:"Pronounce"},"🔊")
+                      ),
+                      item.fileName&&e("div",{style:{
+                        fontSize:11,fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:500,
+                        color:"var(--text-muted)",marginTop:2
+                      }},"từ file: "+item.fileName)
+                    ),
+                    e("button",{
+                      style:{background:"none",border:"none",color:"var(--text-faint)",
+                        fontSize:20,cursor:"pointer",lineHeight:1,transition:"color .15s",marginLeft:8,
+                        borderRadius:6,padding:3},
+                      onMouseEnter:ev=>ev.target.style.color="var(--danger)",
+                      onMouseLeave:ev=>ev.target.style.color="var(--text-faint)",
+                      onClick:()=>removeFromLibrary(item.id)
+                    },"×")
+                  ),
+                  item.tag&&e("span",{className:"tag-pill tp-"+item.tag,style:{marginBottom:4,display:"inline-block"}},
+                    WORD_TAGS.find(t=>t.id===item.tag)?.label||item.tag
+                  ),
+                  item.meaning&&e("div",{style:{
+                    color:"var(--purple)",fontSize:14,marginTop:6,fontWeight:600,
+                    fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:1.5
+                  }},item.meaning),
+                  item.example&&e("div",{style:{
+                    color:"var(--text-muted)",fontSize:13,fontStyle:"italic",
+                    marginTop:5,fontFamily:"'Be Vietnam Pro',sans-serif",
+                    fontWeight:500,lineHeight:1.5
+                  }},'"'+item.example+'"'),
+                  item.feedback&&e(Feedback,{fb:item.feedback})
+                )
+              )
+            )
+      )
+    )
   );
 }
 
-/* ════════ FILE VIEW ════════ */
-function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,clearField}){
-  return e("div",{className:"fade-in"},
-    e("div",{style:{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"space-between",marginBottom:16}},
-      e("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},
-        e("button",{onClick:addRow,className:"btn btn-accent"},"＋ Add Word"),
-        e("button",{onClick:checkAll,className:"btn btn-green"},"⚡ Check All")
-      ),
-      e("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
-        e("button",{onClick:()=>clearField("word"),className:"btn btn-ghost",style:{fontSize:11,padding:"6px 10px"}},"Clear Words"),
-        e("button",{onClick:()=>clearField("meaning"),className:"btn btn-purple",style:{fontSize:11,padding:"6px 10px"}},"Clear Meanings"),
-        e("button",{onClick:()=>clearField("example"),className:"btn btn-blue",style:{fontSize:11,padding:"6px 10px"}},"Clear Examples"),
-        e("button",{onClick:()=>clearField("feedback"),className:"btn btn-danger",style:{fontSize:11,padding:"6px 10px"}},"Clear AI")
+/* ════════════════════════════════════
+   FILE VIEW
+════════════════════════════════════ */
+function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal}){
+  const [fcOrder,setFcOrder]=useState(null); // null = normal order
+
+  useEffect(()=>{setFcOrder(null);},[flashcard,file?.id]);
+
+  const displayRows=useMemo(()=>{
+    if(!flashcard||!fcOrder)return rows.map((_,i)=>i);
+    return fcOrder.filter(i=>i<rows.length);
+  },[rows,flashcard,fcOrder]);
+
+  function handleShuffle(){
+    const indices=rows.map((_,i)=>i);
+    setFcOrder(shuffle(indices));
+  }
+  function resetReveal(){
+    // reset all revealed to false
+  }
+
+  const correctCount=rows.filter(r=>r.feedback?.meaning_status==="Correct").length;
+
+  return e("div",{className:"content-area fade-in",style:{display:"flex",flexDirection:"column",overflow:"hidden"}},
+    /* ──── STICKY TOOLBAR ──── */
+    e("div",{className:"sticky-toolbar-wrap"},
+      e("div",{className:"sticky-toolbar-inner"},
+        /* Left */
+        e("div",{style:{display:"flex",gap:7,flexWrap:"wrap",alignItems:"center"}},
+          e("button",{onClick:addRow,className:"btn btn-accent",style:{padding:"8px 14px"}},"＋ Add Word"),
+          e("button",{onClick:checkAll,className:"btn btn-green",style:{padding:"8px 14px"}},"⚡ Check All"),
+          correctCount>0&&e("button",{onClick:archiveAllCorrect,className:"btn btn-purple",
+            style:{padding:"8px 14px",fontSize:12}},
+            "⭐ Archive Correct ("+correctCount+")"
+          ),
+          flashcard&&e("button",{onClick:handleShuffle,className:"btn btn-yellow",
+            style:{padding:"8px 12px",fontSize:12}},"🔀 Shuffle")
+        ),
+        /* Right - clear buttons */
+        e("div",{style:{display:"flex",gap:5,flexWrap:"wrap"}},
+          e("button",{onClick:()=>clearField("word"),className:"btn btn-ghost",
+            style:{fontSize:11,padding:"6px 9px"}},"Clear Words"),
+          e("button",{onClick:()=>clearField("meaning"),className:"btn btn-ghost",
+            style:{fontSize:11,padding:"6px 9px"}},"Clear Meanings"),
+          e("button",{onClick:()=>clearField("example"),className:"btn btn-ghost",
+            style:{fontSize:11,padding:"6px 9px"}},"Clear Examples"),
+          e("button",{onClick:()=>clearField("feedback"),className:"btn btn-danger",
+            style:{fontSize:11,padding:"6px 9px"}},"Clear AI"),
+          e("button",{onClick:clearAllWords,className:"btn btn-danger",
+            style:{fontSize:11,padding:"6px 9px"},disabled:rows.length===0},
+            "🗑 Delete all")
+        )
       )
     ),
-    rows.length===0
-      ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
-          e("p",{style:{fontSize:48,marginBottom:12}},"✦"),
-          e("p",{style:{fontSize:17,fontWeight:700,color:"var(--text)",marginBottom:6}},file.name),
-          e("p",{},'Click "＋ Add Word" to start.')
-        )
-      :e("div",{style:{display:"flex",flexDirection:"column",gap:12}},
-          rows.map((row,i)=>e(WordCard,{key:row.id||i,row,i,update,del,check,saveToLibrary}))
-        )
+
+    /* ──── SCROLLABLE CONTENT ──── */
+    e("div",{className:"content-scroll"},
+      e("div",{className:"content-inner"},
+        /* Flashcard banner */
+        flashcard&&e("div",{className:"fc-banner",style:{marginTop:16,marginBottom:12}},
+          e("span",{style:{fontSize:16}},"🃏"),
+          e("span",{},"Flashcard Mode — meanings & examples are hidden."),
+          e("strong",{},"Click card to reveal."),
+          fcOrder&&e("span",{style:{
+            background:"var(--yellow-bg)",color:"var(--yellow)",
+            padding:"3px 10px",borderRadius:6,border:"1px solid var(--yellow-border)",
+            fontSize:12,fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700
+          }},"🔀 Shuffled")
+        ),
+
+        rows.length===0
+          ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
+              e("p",{style:{fontSize:48,marginBottom:12}},"✦"),
+              e("p",{style:{fontSize:17,fontWeight:800,color:"var(--text)",marginBottom:6}},file?.name),
+              e("p",{},'Click "＋ Add Word" to start.')
+            )
+          :e("div",{style:{display:"flex",flexDirection:"column",gap:12,paddingTop:4}},
+              displayRows.map(i=>{
+                if(i>=rows.length)return null;
+                const row=rows[i];
+                return e(WordCard,{
+                  key:row.id||i,row,i,update,del,check,saveToLibrary,flashcard,toggleReveal
+                });
+              })
+            )
+      )
+    )
   );
 }
 
-/* ════════ WORD CARD ════════ */
-function WordCard({row,i,update,del,check,saveToLibrary}){
-  return e("div",{className:"word-card"},
-    e("div",{style:{
-      display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",
-      gap:8,marginBottom:12
-    }},
-      e("input",{className:"inp",style:{fontWeight:700},
+/* ════════════════════════════════════
+   WORD CARD
+════════════════════════════════════ */
+function WordCard({row,i,update,del,check,saveToLibrary,flashcard,toggleReveal}){
+  const [showTagMenu,setShowTagMenu]=useState(false);
+  const tagWrap=useRef(null);
+
+  useEffect(()=>{
+    if(!showTagMenu)return;
+    const fn=ev=>{if(tagWrap.current&&!tagWrap.current.contains(ev.target))setShowTagMenu(false);};
+    document.addEventListener("mousedown",fn);
+    return()=>document.removeEventListener("mousedown",fn);
+  },[showTagMenu]);
+
+  const tagInfo=WORD_TAGS.find(t=>t.id===row.tag)||WORD_TAGS[0];
+  const fcHide=flashcard&&!row.revealed;
+
+  return e("div",{className:"word-card"+(row.tag?" tc-"+row.tag:"")},
+
+    /* Row 1: word + speaker + tag */
+    e("div",{style:{display:"flex",alignItems:"center",gap:8,marginBottom:10}},
+      e("input",{className:"inp",
+        style:{fontWeight:800,flex:1,fontFamily:"'Be Vietnam Pro',sans-serif",fontSize:15},
         placeholder:"Word / Phrase",value:row.word,
         onChange:ev=>update(i,"word",ev.target.value)}),
-      e("input",{className:"inp",style:{color:"var(--purple)"},
-        placeholder:"Meaning / Definition",value:row.meaning,
-        onChange:ev=>update(i,"meaning",ev.target.value)}),
-      e("input",{className:"inp",style:{color:"var(--accent)"},
-        placeholder:"Example sentence",value:row.example,
-        onChange:ev=>update(i,"example",ev.target.value)})
+      e("button",{className:"icon-btn",style:{fontSize:17,flexShrink:0},
+        title:"Pronounce",onClick:()=>speak(row.word)},"🔊"),
+      e("div",{ref:tagWrap,style:{position:"relative",flexShrink:0}},
+        e("button",{className:"icon-btn",style:{padding:5},
+          title:"Set tag",onClick:()=>setShowTagMenu(v=>!v)},
+          e("span",{style:{
+            width:13,height:13,borderRadius:"50%",display:"inline-block",
+            background:tagInfo.dotBg,border:"2px solid "+tagInfo.dot,transition:"all .15s"
+          }})
+        ),
+        showTagMenu&&e(TagMenu,{
+          currentTag:row.tag,onChange:v=>update(i,"tag",v),
+          onClose:()=>setShowTagMenu(false)
+        })
+      )
     ),
+
+    /* Row 2: meaning + example or flashcard slots */
+    fcHide
+      ?e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:10}},
+          e("div",{className:"fc-slot",onClick:()=>toggleReveal(i)},"👁 Reveal Meaning"),
+          e("div",{className:"fc-slot",onClick:()=>toggleReveal(i)},"👁 Reveal Example")
+        )
+      :e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:10}},
+          e("input",{className:"inp",
+            style:{color:"var(--purple)",fontWeight:600,fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:"1.5"},
+            placeholder:"Meaning / Definition",value:row.meaning,
+            onChange:ev=>update(i,"meaning",ev.target.value)}),
+          e("input",{className:"inp",
+            style:{color:"var(--accent)",fontWeight:600,fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:"1.5"},
+            placeholder:"Example sentence",value:row.example,
+            onChange:ev=>update(i,"example",ev.target.value)})
+        ),
+
+    /* Row 3: tag + feedback + actions */
     e("div",{style:{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}},
       e("div",{style:{flex:1}},
+        row.tag&&e("span",{className:"tag-pill tp-"+row.tag,style:{marginBottom:6,display:"inline-block"}},
+          tagInfo.label
+        ),
         row.loading
-          ?e("div",{style:{display:"flex",alignItems:"center",gap:8,color:"var(--text-muted)",fontSize:12}},
+          ?e("div",{style:{display:"flex",alignItems:"center",gap:8,
+              color:"var(--text-muted)",fontSize:12,marginTop:4}},
               e("div",{className:"spinner"}),
               e("span",{},"Checking with AI…")
             )
           :e(Feedback,{fb:row.feedback})
       ),
-      e("div",{style:{display:"flex",gap:6,flexShrink:0}},
-        e("button",{onClick:()=>check(i),className:"btn btn-green",style:{padding:"8px 12px"},title:"Check with AI"},"✔"),
-        e("button",{onClick:()=>saveToLibrary(i),className:"btn btn-purple",style:{padding:"8px 12px"},title:"Save to Library"},"⭐"),
-        e("button",{onClick:()=>del(i),className:"btn btn-danger",style:{padding:"8px 12px"},title:"Delete"},"✖")
+      e("div",{style:{display:"flex",gap:5,flexShrink:0}},
+        e("button",{onClick:()=>check(i),className:"btn btn-green",
+          style:{padding:"8px 11px"},title:"Check with AI"},"✔"),
+        e("button",{onClick:()=>saveToLibrary(i),className:"btn btn-purple",
+          style:{padding:"8px 11px"},title:"Save to Library"},"⭐"),
+        e("button",{onClick:()=>del(i),className:"btn btn-danger",
+          style:{padding:"8px 11px"},title:"Delete"},"✖")
       )
     )
   );
