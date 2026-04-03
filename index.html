@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+@ -2,273 +2,738 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,13 +8,22 @@
 
 <title>Vocab AI Final</title>
 
+<title>Vocab AI — Multi-File</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box;}
 body{
   -webkit-tap-highlight-color: transparent;
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-tap-highlight-color:transparent;
+  min-height:100vh;
+  transition:background .3s,color .3s;
 }
 
 /* INPUT */
@@ -25,10 +34,71 @@ body{
   border:1px solid #e5e7eb;
   border-radius:10px;
   font-size:14px;
+/* ════════════════════════════
+   THEMES
+════════════════════════════ */
+[data-theme="light"]{
+  --bg:#f5f6fa;
+  --bg-header:#ffffff;
+  --surface:#ffffff;
+  --surface2:#f0f2f8;
+  --inp-bg:#f8f9fc;
+  --border:#e2e5f0;
+  --text:#1a1a2e;
+  --text-muted:#8b90a8;
+  --text-faint:#c4c8dc;
+  --accent:#4f6ef7;
+  --accent-text:#ffffff;
+  --accent-light:#eef1fd;
+  --accent-border:#c7d2fe;
+  --purple:#7c3aed;
+  --purple-bg:#faf5ff;
+  --purple-border:#ddd6fe;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --green-border:#bbf7d0;
+  --danger:#e53e3e;
+  --danger-bg:#fff5f5;
+  --danger-border:#fecaca;
+  --fb-bg:#f8f9fc;
+  --fb-border:#e2e5f0;
+  --shadow:rgba(79,110,247,.13);
+  --overlay:rgba(30,30,60,.35);
+  --tab-bg:#ffffff;
+  --scroll:#d0d4e8;
 }
 .input:focus{
   border-color:#3b82f6;
   outline:none;
+[data-theme="dark"]{
+  --bg:#0f0f13;
+  --bg-header:#13131a;
+  --surface:#1a1a22;
+  --surface2:#22222e;
+  --inp-bg:#22222e;
+  --border:#2e2e3e;
+  --text:#e8e6e1;
+  --text-muted:#6b6b80;
+  --text-faint:#3a3a4a;
+  --accent:#c8f565;
+  --accent-text:#0f0f13;
+  --accent-light:rgba(200,245,101,.13);
+  --accent-border:rgba(200,245,101,.3);
+  --purple:#a78bfa;
+  --purple-bg:rgba(167,139,250,.12);
+  --purple-border:rgba(167,139,250,.3);
+  --green:#c8f565;
+  --green-bg:rgba(200,245,101,.1);
+  --green-border:rgba(200,245,101,.25);
+  --danger:#f56565;
+  --danger-bg:rgba(245,101,101,.12);
+  --danger-border:rgba(245,101,101,.3);
+  --fb-bg:#1a1a22;
+  --fb-border:#2e2e3e;
+  --shadow:rgba(0,0,0,.5);
+  --overlay:rgba(0,0,0,.72);
+  --tab-bg:#1a1a22;
+  --scroll:#2e2e3e;
 }
 
 /* BUTTON */
@@ -38,41 +108,232 @@ body{
   font-size:13px;
   font-weight:500;
   transition:.2s;
+[data-theme="ocean"]{
+  --bg:#071422;
+  --bg-header:#0c1e35;
+  --surface:#0c1e35;
+  --surface2:#112847;
+  --inp-bg:#112847;
+  --border:#1b3d60;
+  --text:#cce7ff;
+  --text-muted:#4d7ea8;
+  --text-faint:#1e3a5c;
+  --accent:#38bdf8;
+  --accent-text:#071422;
+  --accent-light:rgba(56,189,248,.14);
+  --accent-border:rgba(56,189,248,.3);
+  --purple:#818cf8;
+  --purple-bg:rgba(129,140,248,.12);
+  --purple-border:rgba(129,140,248,.3);
+  --green:#34d399;
+  --green-bg:rgba(52,211,153,.1);
+  --green-border:rgba(52,211,153,.3);
+  --danger:#fb7185;
+  --danger-bg:rgba(251,113,133,.12);
+  --danger-border:rgba(251,113,133,.3);
+  --fb-bg:#0c1e35;
+  --fb-border:#1b3d60;
+  --shadow:rgba(56,189,248,.14);
+  --overlay:rgba(3,8,18,.75);
+  --tab-bg:#0c1e35;
+  --scroll:#1b3d60;
+}
+[data-theme="rose"]{
+  --bg:#fdf2f4;
+  --bg-header:#ffffff;
+  --surface:#ffffff;
+  --surface2:#fef0f2;
+  --inp-bg:#fff5f6;
+  --border:#fbc8d0;
+  --text:#3b0a16;
+  --text-muted:#a0596a;
+  --text-faint:#e8b4bc;
+  --accent:#e11d48;
+  --accent-text:#ffffff;
+  --accent-light:#fff1f3;
+  --accent-border:#fda4af;
+  --purple:#9d174d;
+  --purple-bg:#fdf2f7;
+  --purple-border:#f9a8d4;
+  --green:#15803d;
+  --green-bg:#f0fdf4;
+  --green-border:#86efac;
+  --danger:#dc2626;
+  --danger-bg:#fff1f2;
+  --danger-border:#fca5a5;
+  --fb-bg:#fff5f6;
+  --fb-border:#fbc8d0;
+  --shadow:rgba(225,29,72,.13);
+  --overlay:rgba(60,10,20,.35);
+  --tab-bg:#ffffff;
+  --scroll:#fbc8d0;
 }
 .btn:active{
   transform:scale(.95);
+[data-theme="forest"]{
+  --bg:#091409;
+  --bg-header:#0f1e0f;
+  --surface:#0f1e0f;
+  --surface2:#162416;
+  --inp-bg:#162416;
+  --border:#1e3520;
+  --text:#c8f0cc;
+  --text-muted:#507855;
+  --text-faint:#1e3520;
+  --accent:#4ade80;
+  --accent-text:#091409;
+  --accent-light:rgba(74,222,128,.13);
+  --accent-border:rgba(74,222,128,.3);
+  --purple:#a3e635;
+  --purple-bg:rgba(163,230,53,.1);
+  --purple-border:rgba(163,230,53,.3);
+  --green:#4ade80;
+  --green-bg:rgba(74,222,128,.1);
+  --green-border:rgba(74,222,128,.25);
+  --danger:#f87171;
+  --danger-bg:rgba(248,113,113,.1);
+  --danger-border:rgba(248,113,113,.3);
+  --fb-bg:#0f1e0f;
+  --fb-border:#1e3520;
+  --shadow:rgba(74,222,128,.12);
+  --overlay:rgba(0,5,0,.75);
+  --tab-bg:#0f1e0f;
+  --scroll:#1e3520;
 }
 .btn:hover{
   opacity:.85;
+
+/* ════════════ SCROLLBAR ════════════ */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:4px}
+
+/* ════════════ INPUT ════════════ */
+.inp{
+  width:100%;padding:8px 12px;
+  background:var(--inp-bg);
+  border:1.5px solid var(--border);
+  border-radius:10px;font-size:13px;
+  font-family:'DM Mono',monospace;
+  color:var(--text);
+  transition:border-color .2s,box-shadow .2s,background .3s;
 }
+.inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-light);}
+.inp::placeholder{color:var(--text-faint);}
 
 /* LOADING */
+/* ════════════ BUTTONS ════════════ */
+.btn{
+  padding:9px 16px;border-radius:10px;font-size:13px;
+  font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;
+  transition:all .18s;border:none;
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.btn:active{transform:scale(.94);}
+.btn:hover{opacity:.85;}
+.btn-accent{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 10px var(--shadow);}
+.btn-ghost{background:var(--surface);color:var(--text-muted);border:1.5px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.btn-danger{background:var(--danger-bg);color:var(--danger);border:1.5px solid var(--danger-border);}
+.btn-purple{background:var(--purple-bg);color:var(--purple);border:1.5px solid var(--purple-border);}
+.btn-green{background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border);}
+.btn-blue{background:var(--accent-light);color:var(--accent);border:1.5px solid var(--accent-border);}
+
+/* ════════════ SPINNER ════════════ */
 .spinner{
   border:3px solid #eee;
   border-top:3px solid #3b82f6;
   border-radius:50%;
   width:16px;
   height:16px;
+  border:2px solid var(--border);border-top:2px solid var(--accent);
+  border-radius:50%;width:18px;height:18px;
   animation:spin 1s linear infinite;
 }
 @keyframes spin{
   to{transform:rotate(360deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ════════════ FILE TAB ════════════ */
+.file-tab{
+  padding:7px 16px;border-radius:10px;font-size:13px;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);
+  background:var(--tab-bg);color:var(--text-muted);
+  transition:all .2s;white-space:nowrap;max-width:160px;
+  overflow:hidden;text-overflow:ellipsis;
 }
 
 /* 📱 MOBILE TABLE SCROLL */
 .table-wrap{
   overflow-x:auto;
+.file-tab.active{
+  background:var(--accent);color:var(--accent-text);
+  border-color:var(--accent);box-shadow:0 2px 10px var(--shadow);
 }
+.file-tab:hover:not(.active){border-color:var(--accent);color:var(--accent);}
+
+/* ════════════ ANIMATIONS ════════════ */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .25s ease both;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.slide-down{animation:slideDown .22s ease both;}
+
+/* ════════════ MISC ════════════ */
+.score-badge{
+  background:var(--accent-light);color:var(--accent);
+  padding:2px 9px;border-radius:6px;font-size:12px;font-weight:700;
+  font-family:'DM Mono',monospace;
+}
+.tag{
+  display:inline-block;font-size:10px;font-family:'DM Mono',monospace;
+  padding:2px 7px;border-radius:5px;
+}
+.overlay{
+  position:fixed;inset:0;background:var(--overlay);
+  display:flex;align-items:center;justify-content:center;
+  z-index:200;backdrop-filter:blur(6px);
+}
+.modal{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:18px;padding:24px;width:90%;max-width:420px;
+  box-shadow:0 16px 60px var(--shadow);animation:fadeIn .22s ease both;
+}
+.lib-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:14px;padding:14px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.lib-card:hover{border-color:var(--accent);box-shadow:0 2px 16px var(--shadow);}
+.word-card{
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:16px;padding:16px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.word-card:hover{border-color:var(--accent);box-shadow:0 3px 18px var(--shadow);}
 </style>
 </head>
 
 <body class="bg-gray-50">
+<body>
 <div id="root"></div>
 
 <script>
 const e = React.createElement;
 
 /* SAFE PARSE */
+const e=React.createElement;
+const {useState,useEffect,useRef,useCallback}=React;
+
+/* ════════ THEME DEFINITIONS ════════ */
+const THEMES=[
+  {id:"light",  label:"Light",   emoji:"☀️",  dot:"#e2e5f0", ring:"#4f6ef7"},
+  {id:"dark",   label:"Dark",    emoji:"🌙",  dot:"#1a1a22", ring:"#c8f565"},
+  {id:"ocean",  label:"Ocean",   emoji:"🌊",  dot:"#0c1e35", ring:"#38bdf8"},
+  {id:"rose",   label:"Rose",    emoji:"🌸",  dot:"#fdf2f4", ring:"#e11d48"},
+  {id:"forest", label:"Forest",  emoji:"🌿",  dot:"#0f1e0f", ring:"#4ade80"},
+];
+
+/* ════════ HELPERS ════════ */
 function safeParse(t){
   try{
     t=(t||"").replace(/```json|```/g,"");
@@ -80,11 +341,33 @@ function safeParse(t){
   }catch{
     return {score:"?",meaning_status:"Error",errors:t};
   }
+  try{t=(t||"").replace(/```json|```/g,"");return JSON.parse(t);}
+  catch{return{score:"?",meaning_status:"Error",errors:String(t)};}
 }
 
 function formatErrors(err){
   if(!err) return [];
   return err.split(/[\n,.]/).filter(x=>x.trim());
+  if(!err)return[];
+  return String(err).split(/[\n,.]/).map(x=>x.trim()).filter(Boolean);
+}
+function uid(){return Date.now()+Math.random().toString(36).slice(2);}
+
+const API_KEY="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";
+
+/* ════════ LOAD STATE ════════ */
+function loadState(){
+  let files,library,activeId,theme;
+  try{files=JSON.parse(localStorage.getItem("vam_files")||"null");}catch{}
+  try{library=JSON.parse(localStorage.getItem("vam_library")||"[]");}catch{}
+  try{activeId=localStorage.getItem("vam_active");}catch{}
+  try{theme=localStorage.getItem("vam_theme")||"light";}catch{theme="light";}
+  if(!Array.isArray(files)||files.length===0){
+    const id=uid();
+    files=[{id,name:"IELTS Vocab",rows:[]}];
+    activeId=id;
+  }
+  return{files,library:Array.isArray(library)?library:[],activeId:activeId||files[0].id,theme};
 }
 
 /* APP */
@@ -98,40 +381,227 @@ function App(){
       setRows(Array.isArray(d)?d:[]);
     }catch{ setRows([]); }
   },[]);
+/* ════════ FEEDBACK ════════ */
+function Feedback({fb}){
+  if(!fb)return null;
+  const errors=formatErrors(fb.errors);
+  return e("div",{className:"mt-2 rounded-xl p-3 text-xs",style:{
+    background:"var(--fb-bg)",border:"1.5px solid var(--fb-border)",display:"flex",
+    flexDirection:"column",gap:6
+  }},
+    e("div",{style:{display:"flex",justifyContent:"space-between",paddingBottom:6,
+      borderBottom:"1px solid var(--fb-border)"}},
+      e("span",{style:{color:"var(--text-muted)",fontSize:10,fontWeight:600,
+        letterSpacing:"0.08em",textTransform:"uppercase",fontFamily:"'DM Mono',monospace"}},"AI Review"),
+      e("span",{className:"score-badge"},fb.score||"?")
+    ),
+    e("div",{style:{
+      color:fb.meaning_status==="Correct"?"var(--green)":"var(--danger)",fontWeight:600
+    }},fb.meaning_status||""),
+    errors.length>0&&e("ul",{style:{
+      background:"var(--danger-bg)",border:"1px solid var(--danger-border)",
+      borderRadius:8,padding:"6px 10px",color:"var(--danger)",
+      listStyleType:"disc",listStylePosition:"inside",margin:0
+    }},errors.slice(0,3).map((er,i)=>e("li",{key:i},er))),
+    fb.improved&&e("div",{style:{
+      background:"var(--accent-light)",border:"1px solid var(--accent-border)",
+      borderRadius:8,padding:"6px 10px",color:"var(--accent)",
+      fontFamily:"'DM Mono',monospace",fontStyle:"italic"
+    }},"→ "+fb.improved)
+  );
+}
 
   React.useEffect(()=>{
     localStorage.setItem("vocab_data",JSON.stringify(rows));
   },[rows]);
+/* ════════ THEME PANEL ════════ */
+function ThemePanel({current,onChange,onClose}){
+  return e("div",{className:"overlay",onClick:onClose},
+    e("div",{className:"modal",onClick:ev=>ev.stopPropagation()},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:20}},
+        e("div",null,
+          e("h3",{style:{fontSize:20,fontWeight:900,color:"var(--accent)",margin:0}},"🎨 Appearance"),
+          e("p",{style:{fontSize:12,color:"var(--text-muted)",margin:"4px 0 0"}},"Choose your preferred theme")
+        ),
+        e("button",{onClick:onClose,style:{
+          background:"none",border:"none",color:"var(--text-muted)",
+          fontSize:24,cursor:"pointer",lineHeight:1,padding:4
+        }},"×")
+      ),
+      e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+        THEMES.map(th=>{
+          const active=current===th.id;
+          return e("button",{
+            key:th.id,onClick:()=>{onChange(th.id);onClose();},
+            style:{
+              display:"flex",alignItems:"center",gap:14,
+              padding:"12px 16px",borderRadius:14,cursor:"pointer",width:"100%",
+              textAlign:"left",fontFamily:"'Syne',sans-serif",
+              background:active?"var(--accent-light)":"var(--surface2)",
+              border:active?"1.5px solid var(--accent)":"1.5px solid var(--border)",
+              transition:"all .16s",
+            }
+          },
+            e("span",{style:{
+              width:24,height:24,borderRadius:"50%",flexShrink:0,
+              background:th.dot,border:"2.5px solid "+th.ring,
+              boxShadow:active?"0 0 0 3px var(--accent-light)":"none",
+              display:"inline-block",transition:"box-shadow .2s"
+            }}),
+            e("div",{style:{flex:1}},
+              e("div",{style:{
+                fontWeight:700,fontSize:14,
+                color:active?"var(--accent)":"var(--text)"
+              }},th.emoji+" "+th.label)
+            ),
+            active&&e("span",{style:{
+              fontSize:11,color:"var(--accent)",fontFamily:"'DM Mono',monospace",
+              background:"var(--accent-light)",padding:"2px 8px",borderRadius:6,
+              border:"1px solid var(--accent-border)"
+            }},"active")
+          );
+        })
+      )
+    )
+  );
+}
 
   const apiKey="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";
+/* ════════ NEW FILE MODAL ════════ */
+function NewFileModal({onConfirm,onCancel}){
+  const [name,setName]=useState("");
+  const ref=useRef(null);
+  useEffect(()=>{setTimeout(()=>ref.current?.focus(),50);},[]);
+  const confirm=()=>{if(name.trim())onConfirm(name.trim());};
+  return e("div",{className:"overlay"},
+    e("div",{className:"modal"},
+      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:16,marginTop:0}},"✦ New File"),
+      e("input",{ref,className:"inp",style:{marginBottom:16},
+        placeholder:"e.g. IELTS Writing, Daily Chat…",
+        value:name,onChange:ev=>setName(ev.target.value),
+        onKeyDown:ev=>{if(ev.key==="Enter")confirm();if(ev.key==="Escape")onCancel();}
+      }),
+      e("div",{style:{display:"flex",gap:8,justifyContent:"flex-end"}},
+        e("button",{className:"btn btn-ghost",onClick:onCancel},"Cancel"),
+        e("button",{className:"btn btn-accent",onClick:confirm,disabled:!name.trim()},"Create")
+      )
+    )
+  );
+}
 
   const addRow=()=>setRows(r=>[...r,{word:"",meaning:"",example:"",feedback:null,loading:false}]);
+/* ════════ IMPORT MODAL ════════ */
+function ImportModal({onImport,onCancel}){
+  const [err,setErr]=useState("");
+  const handleFile=ev=>{
+    const f=ev.target.files[0];if(!f)return;
+    const reader=new FileReader();
+    reader.onload=e2=>{
+      try{
+        const data=JSON.parse(e2.target.result);
+        if(!data.files||!Array.isArray(data.files))throw new Error("Invalid format");
+        onImport(data);
+      }catch(ex){setErr("❌ "+ex.message);}
+    };
+    reader.readAsText(f);
+  };
+  return e("div",{className:"overlay"},
+    e("div",{className:"modal"},
+      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:6,marginTop:0}},"⬆ Import JSON"),
+      e("p",{style:{fontSize:13,color:"var(--text-muted)",marginBottom:14}},"Select a previously exported vocab.json file."),
+      e("input",{type:"file",accept:".json",className:"inp",style:{marginBottom:8},onChange:handleFile}),
+      err&&e("p",{style:{color:"var(--danger)",fontSize:13,marginBottom:8}},err),
+      e("div",{style:{display:"flex",gap:8,justifyContent:"flex-end",marginTop:8}},
+        e("button",{className:"btn btn-ghost",onClick:onCancel},"Cancel")
+      )
+    )
+  );
+}
 
   const update=(i,f,v)=>{
     setRows(r=>{
       const c=[...r];
       c[i]={...c[i],[f]:v};
       return c;
+/* ════════ MAIN APP ════════ */
+function App(){
+  const init=loadState();
+  const [files,setFiles]=useState(init.files);
+  const [library,setLibrary]=useState(init.library);
+  const [activeId,setActiveId]=useState(init.activeId);
+  const [theme,setTheme]=useState(init.theme);
+  const [showNewFile,setShowNewFile]=useState(false);
+  const [showImport,setShowImport]=useState(false);
+  const [showLibrary,setShowLibrary]=useState(false);
+  const [showTheme,setShowTheme]=useState(false);
+  const [transKey,setTransKey]=useState(0);
+
+  useEffect(()=>localStorage.setItem("vam_files",JSON.stringify(files)),[files]);
+  useEffect(()=>localStorage.setItem("vam_library",JSON.stringify(library)),[library]);
+  useEffect(()=>localStorage.setItem("vam_active",activeId),[activeId]);
+  useEffect(()=>{
+    localStorage.setItem("vam_theme",theme);
+    document.documentElement.setAttribute("data-theme",theme);
+  },[theme]);
+  useEffect(()=>{document.documentElement.setAttribute("data-theme",init.theme);},[]);
+
+  const activeFile=files.find(f=>f.id===activeId)||files[0];
+  const rows=activeFile?.rows||[];
+
+  const setRows=useCallback(updater=>{
+    setFiles(fs=>fs.map(f=>{
+      if(f.id!==activeId)return f;
+      return{...f,rows:typeof updater==="function"?updater(f.rows):updater};
+    }));
+  },[activeId]);
+
+  function switchFile(id){setActiveId(id);setTransKey(k=>k+1);}
+  function createFile(name){
+    const id=uid();
+    setFiles(fs=>[...fs,{id,name,rows:[]}]);
+    setShowNewFile(false);switchFile(id);
+  }
+  function deleteFile(id){
+    if(files.length===1){alert("Cannot delete the last file.");return;}
+    if(!confirm("Delete this file and all its words?"))return;
+    setFiles(fs=>{
+      const next=fs.filter(f=>f.id!==id);
+      if(activeId===id)setActiveId(next[0].id);
+      return next;
     });
   };
+  }
 
+  const addRow=()=>setRows(r=>[...r,{id:uid(),word:"",meaning:"",example:"",feedback:null,loading:false}]);
+  const update=(i,field,val)=>setRows(r=>{const c=[...r];c[i]={...c[i],[field]:val};return c;});
   const del=i=>setRows(r=>r.filter((_,idx)=>idx!==i));
+  const clearField=field=>setRows(r=>r.map(x=>({...x,[field]:field==="feedback"?null:""})));
 
   async function check(i){
     setRows(r=>{
       const c=[...r]; c[i].loading=true; return c;
     });
+  function saveToLibrary(i){
+    const item=rows[i];if(!item||!item.word)return;
+    setLibrary(lib=>[{...item,id:uid(),fileId:activeId,fileName:activeFile.name},...lib]);
+    del(i);
+  }
+  const removeFromLibrary=id=>setLibrary(lib=>lib.filter(x=>x.id!==id));
 
+  async function check(i){
+    setRows(r=>{const c=[...r];c[i]={...c[i],loading:true};return c;});
     try{
       const row=rows[i];
       if(!row.word||!row.example) throw "missing";
 
+      if(!row.word||!row.example)throw"Missing word or example";
       const res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
         method:"POST",
         headers:{
           "Authorization":"Bearer "+apiKey,
           "Content-Type":"application/json"
         },
+        headers:{"Authorization":"Bearer "+API_KEY,"Content-Type":"application/json"},
         body:JSON.stringify({
           model:"llama-3.3-70b-versatile",
           messages:[
@@ -152,6 +622,8 @@ Keep it concise.`
 Meaning: ${row.meaning}
 Example: ${row.example}`
             }
+            {role:"system",content:`Return JSON only:\n{"score":"x/10","meaning_status":"Correct/Incorrect","errors":"short phrases, comma separated","improved":"short natural sentence"}\nKeep it concise.`},
+            {role:"user",content:`Word: ${row.word}\nMeaning: ${row.meaning}\nExample: ${row.example}`}
           ]
         })
       });
@@ -173,6 +645,9 @@ Example: ${row.example}`
         c[i].loading=false;
         return c;
       });
+      setRows(r=>{const c=[...r];c[i]={...c[i],feedback:safeParse(txt),loading:false};return c;});
+    }catch(ex){
+      setRows(r=>{const c=[...r];c[i]={...c[i],feedback:{errors:String(ex)},loading:false};return c;});
     }
   }
 
@@ -209,6 +684,20 @@ Example: ${row.example}`
         className:"bg-blue-50 border border-blue-200 rounded p-2 text-blue-700 italic"
       }, fb.improved)
     );
+  const checkAll=()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*280));
+
+  function exportJSON(){
+    const data={version:1,exportedAt:new Date().toISOString(),files,library};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");a.href=url;a.download="vocab_backup.json";a.click();
+    URL.revokeObjectURL(url);
+  }
+  function doImport(data){
+    if(!confirm("This will REPLACE all current data. Continue?"))return;
+    setFiles(data.files||[]);setLibrary(data.library||[]);
+    setActiveId((data.files||[])[0]?.id||"");
+    setShowImport(false);setTransKey(k=>k+1);
   }
 
   return e("div",{className:"p-4 md:p-5 max-w-7xl mx-auto"},
@@ -218,12 +707,48 @@ Example: ${row.example}`
       e("div",{className:"flex gap-2 flex-wrap"},
         e("button",{onClick:addRow,className:"btn bg-blue-500 text-white"},"＋ Add"),
         e("button",{onClick:()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*250)),className:"btn bg-green-500 text-white"},"⚡ Check All")
+  const curTheme=THEMES.find(t=>t.id===theme)||THEMES[0];
+
+  return e("div",{style:{minHeight:"100vh",display:"flex",flexDirection:"column"}},
+
+    /* ── HEADER ── */
+    e("header",{style:{
+      position:"sticky",top:0,zIndex:50,
+      background:"var(--bg-header)",borderBottom:"1px solid var(--border)",
+      padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",
+      gap:8,boxShadow:"0 1px 12px var(--shadow)",transition:"background .3s"
+    }},
+      e("div",{style:{display:"flex",alignItems:"center",gap:6}},
+        e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--accent)"}},"VOCAB"),
+        e("span",{style:{fontSize:20,fontWeight:900,letterSpacing:"-0.03em",color:"var(--text)"}},"AI"),
+        e("span",{className:"tag",style:{
+          background:"var(--accent-light)",color:"var(--accent)",
+          border:"1px solid var(--accent-border)",marginLeft:4
+        }},"MULTI")
       ),
       e("div",{className:"flex gap-2 text-xs flex-wrap"},
         e("button",{onClick:()=>clear("word"),className:"btn bg-gray-200"},"Word"),
         e("button",{onClick:()=>clear("meaning"),className:"btn bg-purple-100 text-purple-600"},"Meaning"),
         e("button",{onClick:()=>clear("example"),className:"btn bg-blue-100 text-blue-600"},"Example"),
         e("button",{onClick:()=>clear("feedback"),className:"btn bg-red-100 text-red-600"},"AI")
+      e("div",{style:{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap",justifyContent:"flex-end"}},
+        /* Theme button */
+        e("button",{
+          className:"btn btn-ghost",
+          style:{fontSize:12,padding:"7px 12px",gap:7},
+          onClick:()=>setShowTheme(true)
+        },
+          e("span",{style:{
+            width:13,height:13,borderRadius:"50%",flexShrink:0,display:"inline-block",
+            background:curTheme.dot,border:"2px solid "+curTheme.ring
+          }}),
+          curTheme.emoji," Theme"
+        ),
+        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},
+          onClick:()=>setShowLibrary(v=>!v)
+        }, showLibrary?"← Back":`📚 ${library.length}`),
+        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},onClick:exportJSON},"⬇ Export"),
+        e("button",{className:"btn btn-ghost",style:{fontSize:12,padding:"7px 12px"},onClick:()=>setShowImport(true)},"⬆ Import")
       )
     ),
 
@@ -233,6 +758,25 @@ Example: ${row.example}`
         e("thead",{className:"bg-blue-50 text-sm"},
           e("tr",null,
             ["Word","Meaning","Example","AI Feedback",""].map(h=>e("th",{key:h,className:"p-2"},h))
+    /* ── FILE TABS ── */
+    !showLibrary&&e("div",{style:{
+      background:"var(--bg-header)",borderBottom:"1px solid var(--border)",
+      padding:"8px 16px",overflowX:"auto",transition:"background .3s"
+    }},
+      e("div",{style:{display:"flex",gap:8,alignItems:"center",minWidth:"max-content"}},
+        ...files.map(f=>
+          e("div",{key:f.id,style:{display:"flex",alignItems:"center",gap:3}},
+            e("button",{
+              className:"file-tab"+(f.id===activeId?" active":""),
+              title:f.name,onClick:()=>switchFile(f.id)
+            },f.name),
+            files.length>1&&e("button",{
+              style:{background:"none",border:"none",color:"var(--text-faint)",
+                fontSize:16,cursor:"pointer",padding:"0 3px",lineHeight:1,transition:"color .15s"},
+              onMouseEnter:ev=>ev.target.style.color="var(--danger)",
+              onMouseLeave:ev=>ev.target.style.color="var(--text-faint)",
+              onClick:()=>deleteFile(f.id),title:"Delete"
+            },"×")
           )
         ),
         e("tbody",null,
@@ -242,17 +786,66 @@ Example: ${row.example}`
               e("td",{className:"p-2"},
                 e("input",{className:"input",value:row.word,onChange:e=>update(i,"word",e.target.value)})
               ),
+        e("button",{
+          className:"btn btn-ghost",style:{fontSize:12,padding:"6px 12px",marginLeft:4},
+          onClick:()=>setShowNewFile(true)
+        },"＋ New File")
+      )
+    ),
 
               e("td",{className:"p-2"},
                 e("input",{className:"input text-purple-700",value:row.meaning,onChange:e=>update(i,"meaning",e.target.value)})
               ),
+    /* ── MAIN ── */
+    e("main",{style:{flex:1,padding:"20px 16px",maxWidth:1100,margin:"0 auto",width:"100%"}},
+      showLibrary
+        ?e(LibraryView,{key:"lib",library,removeFromLibrary})
+        :e(FileView,{key:transKey,file:activeFile,rows,update,del,check,checkAll,addRow,saveToLibrary,clearField})
+    ),
 
               e("td",{className:"p-2"},
                 e("input",{className:"input text-blue-700",value:row.example,onChange:e=>update(i,"example",e.target.value)})
               ),
+    /* ── MODALS ── */
+    showTheme&&e(ThemePanel,{current:theme,onChange:setTheme,onClose:()=>setShowTheme(false)}),
+    showNewFile&&e(NewFileModal,{onConfirm:createFile,onCancel:()=>setShowNewFile(false)}),
+    showImport&&e(ImportModal,{onImport:doImport,onCancel:()=>setShowImport(false)})
+  );
+}
 
               e("td",{className:"p-2"},
                 row.loading ? e("div",{className:"spinner"}) : e(Feedback,row.feedback)
+/* ════════ LIBRARY VIEW ════════ */
+function LibraryView({library,removeFromLibrary}){
+  return e("div",{className:"fade-in"},
+    e("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}},
+      e("h2",{style:{fontSize:22,fontWeight:900,color:"var(--accent)",margin:0}},"📚 Library"),
+      e("span",{className:"tag",style:{
+        background:"var(--accent-light)",color:"var(--accent)",border:"1px solid var(--accent-border)"
+      }},library.length+" words")
+    ),
+    library.length===0
+      ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
+          e("p",{style:{fontSize:40,marginBottom:12}},"✦"),
+          e("p",{},"No saved words yet. Star a word to save it here.")
+        )
+      :e("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12}},
+          library.map(item=>
+            e("div",{key:item.id,className:"lib-card"},
+              e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}},
+                e("div",null,
+                  e("div",{style:{fontWeight:700,fontSize:15,color:"var(--text)"}},item.word),
+                  item.fileName&&e("div",{style:{
+                    fontSize:10,fontFamily:"'DM Mono',monospace",color:"var(--text-muted)",marginTop:2
+                  }},"from: "+item.fileName)
+                ),
+                e("button",{
+                  style:{background:"none",border:"none",color:"var(--text-faint)",
+                    fontSize:20,cursor:"pointer",lineHeight:1,transition:"color .15s"},
+                  onMouseEnter:ev=>ev.target.style.color="var(--danger)",
+                  onMouseLeave:ev=>ev.target.style.color="var(--text-faint)",
+                  onClick:()=>removeFromLibrary(item.id)
+                },"×")
               ),
 
               e("td",{className:"p-2"},
@@ -260,16 +853,82 @@ Example: ${row.example}`
                 e("button",{onClick:()=>del(i),className:"btn bg-red-100"},"✖")
               )
 
+              item.meaning&&e("div",{style:{color:"var(--purple)",fontSize:13,marginTop:4}},item.meaning),
+              item.example&&e("div",{style:{
+                color:"var(--text-muted)",fontSize:12,fontStyle:"italic",
+                marginTop:4,fontFamily:"'DM Mono',monospace"
+              }},'"'+item.example+'"'),
+              item.feedback&&e(Feedback,{fb:item.feedback})
             )
           )
         )
+  );
+}
+
+/* ════════ FILE VIEW ════════ */
+function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,clearField}){
+  return e("div",{className:"fade-in"},
+    e("div",{style:{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"space-between",marginBottom:16}},
+      e("div",{style:{display:"flex",gap:8,flexWrap:"wrap"}},
+        e("button",{onClick:addRow,className:"btn btn-accent"},"＋ Add Word"),
+        e("button",{onClick:checkAll,className:"btn btn-green"},"⚡ Check All")
+      ),
+      e("div",{style:{display:"flex",gap:6,flexWrap:"wrap"}},
+        e("button",{onClick:()=>clearField("word"),className:"btn btn-ghost",style:{fontSize:11,padding:"6px 10px"}},"Clear Words"),
+        e("button",{onClick:()=>clearField("meaning"),className:"btn btn-purple",style:{fontSize:11,padding:"6px 10px"}},"Clear Meanings"),
+        e("button",{onClick:()=>clearField("example"),className:"btn btn-blue",style:{fontSize:11,padding:"6px 10px"}},"Clear Examples"),
+        e("button",{onClick:()=>clearField("feedback"),className:"btn btn-danger",style:{fontSize:11,padding:"6px 10px"}},"Clear AI")
+      )
+    ),
+    rows.length===0
+      ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
+          e("p",{style:{fontSize:48,marginBottom:12}},"✦"),
+          e("p",{style:{fontSize:17,fontWeight:700,color:"var(--text)",marginBottom:6}},file.name),
+          e("p",{},'Click "＋ Add Word" to start.')
+        )
+      :e("div",{style:{display:"flex",flexDirection:"column",gap:12}},
+          rows.map((row,i)=>e(WordCard,{key:row.id||i,row,i,update,del,check,saveToLibrary}))
+        )
+  );
+}
+
+/* ════════ WORD CARD ════════ */
+function WordCard({row,i,update,del,check,saveToLibrary}){
+  return e("div",{className:"word-card"},
+    e("div",{style:{
+      display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",
+      gap:8,marginBottom:12
+    }},
+      e("input",{className:"inp",style:{fontWeight:700},
+        placeholder:"Word / Phrase",value:row.word,
+        onChange:ev=>update(i,"word",ev.target.value)}),
+      e("input",{className:"inp",style:{color:"var(--purple)"},
+        placeholder:"Meaning / Definition",value:row.meaning,
+        onChange:ev=>update(i,"meaning",ev.target.value)}),
+      e("input",{className:"inp",style:{color:"var(--accent)"},
+        placeholder:"Example sentence",value:row.example,
+        onChange:ev=>update(i,"example",ev.target.value)})
+    ),
+    e("div",{style:{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:8}},
+      e("div",{style:{flex:1}},
+        row.loading
+          ?e("div",{style:{display:"flex",alignItems:"center",gap:8,color:"var(--text-muted)",fontSize:12}},
+              e("div",{className:"spinner"}),
+              e("span",{},"Checking with AI…")
+            )
+          :e(Feedback,{fb:row.feedback})
+      ),
+      e("div",{style:{display:"flex",gap:6,flexShrink:0}},
+        e("button",{onClick:()=>check(i),className:"btn btn-green",style:{padding:"8px 12px"},title:"Check with AI"},"✔"),
+        e("button",{onClick:()=>saveToLibrary(i),className:"btn btn-purple",style:{padding:"8px 12px"},title:"Save to Library"},"⭐"),
+        e("button",{onClick:()=>del(i),className:"btn btn-danger",style:{padding:"8px 12px"},title:"Delete"},"✖")
       )
     )
   );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const root=ReactDOM.createRoot(document.getElementById("root"));
 root.render(e(App));
 </script>
 </body>
-</html>
