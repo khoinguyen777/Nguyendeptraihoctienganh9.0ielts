@@ -1,13 +1,8 @@
-@ -2,273 +2,738 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- 🔥 QUAN TRỌNG CHO MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>Vocab AI Final</title>
-
 <title>Vocab AI — Multi-File</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -17,7 +12,6 @@
 <style>
 *{box-sizing:border-box;}
 body{
-  -webkit-tap-highlight-color: transparent;
   font-family:'Syne',sans-serif;
   background:var(--bg);
   color:var(--text);
@@ -26,14 +20,6 @@ body{
   transition:background .3s,color .3s;
 }
 
-/* INPUT */
-.input{
-  width:100%;
-  height:38px;
-  padding:6px 10px;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
-  font-size:14px;
 /* ════════════════════════════
    THEMES
 ════════════════════════════ */
@@ -67,9 +53,6 @@ body{
   --tab-bg:#ffffff;
   --scroll:#d0d4e8;
 }
-.input:focus{
-  border-color:#3b82f6;
-  outline:none;
 [data-theme="dark"]{
   --bg:#0f0f13;
   --bg-header:#13131a;
@@ -100,14 +83,6 @@ body{
   --tab-bg:#1a1a22;
   --scroll:#2e2e3e;
 }
-
-/* BUTTON */
-.btn{
-  padding:6px 12px;
-  border-radius:10px;
-  font-size:13px;
-  font-weight:500;
-  transition:.2s;
 [data-theme="ocean"]{
   --bg:#071422;
   --bg-header:#0c1e35;
@@ -168,8 +143,6 @@ body{
   --tab-bg:#ffffff;
   --scroll:#fbc8d0;
 }
-.btn:active{
-  transform:scale(.95);
 [data-theme="forest"]{
   --bg:#091409;
   --bg-header:#0f1e0f;
@@ -200,8 +173,6 @@ body{
   --tab-bg:#0f1e0f;
   --scroll:#1e3520;
 }
-.btn:hover{
-  opacity:.85;
 
 /* ════════════ SCROLLBAR ════════════ */
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -221,7 +192,6 @@ body{
 .inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-light);}
 .inp::placeholder{color:var(--text-faint);}
 
-/* LOADING */
 /* ════════════ BUTTONS ════════════ */
 .btn{
   padding:9px 16px;border-radius:10px;font-size:13px;
@@ -241,17 +211,10 @@ body{
 
 /* ════════════ SPINNER ════════════ */
 .spinner{
-  border:3px solid #eee;
-  border-top:3px solid #3b82f6;
-  border-radius:50%;
-  width:16px;
-  height:16px;
   border:2px solid var(--border);border-top:2px solid var(--accent);
   border-radius:50%;width:18px;height:18px;
   animation:spin 1s linear infinite;
 }
-@keyframes spin{
-  to{transform:rotate(360deg)}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ════════════ FILE TAB ════════════ */
@@ -262,10 +225,6 @@ body{
   transition:all .2s;white-space:nowrap;max-width:160px;
   overflow:hidden;text-overflow:ellipsis;
 }
-
-/* 📱 MOBILE TABLE SCROLL */
-.table-wrap{
-  overflow-x:auto;
 .file-tab.active{
   background:var(--accent);color:var(--accent-text);
   border-color:var(--accent);box-shadow:0 2px 10px var(--shadow);
@@ -312,15 +271,9 @@ body{
 .word-card:hover{border-color:var(--accent);box-shadow:0 3px 18px var(--shadow);}
 </style>
 </head>
-
-<body class="bg-gray-50">
 <body>
 <div id="root"></div>
-
 <script>
-const e = React.createElement;
-
-/* SAFE PARSE */
 const e=React.createElement;
 const {useState,useEffect,useRef,useCallback}=React;
 
@@ -335,19 +288,10 @@ const THEMES=[
 
 /* ════════ HELPERS ════════ */
 function safeParse(t){
-  try{
-    t=(t||"").replace(/```json|```/g,"");
-    return JSON.parse(t);
-  }catch{
-    return {score:"?",meaning_status:"Error",errors:t};
-  }
   try{t=(t||"").replace(/```json|```/g,"");return JSON.parse(t);}
   catch{return{score:"?",meaning_status:"Error",errors:String(t)};}
 }
-
 function formatErrors(err){
-  if(!err) return [];
-  return err.split(/[\n,.]/).filter(x=>x.trim());
   if(!err)return[];
   return String(err).split(/[\n,.]/).map(x=>x.trim()).filter(Boolean);
 }
@@ -370,17 +314,6 @@ function loadState(){
   return{files,library:Array.isArray(library)?library:[],activeId:activeId||files[0].id,theme};
 }
 
-/* APP */
-function App(){
-
-  const [rows,setRows] = React.useState([]);
-
-  React.useEffect(()=>{
-    try{
-      const d = JSON.parse(localStorage.getItem("vocab_data")||"[]");
-      setRows(Array.isArray(d)?d:[]);
-    }catch{ setRows([]); }
-  },[]);
 /* ════════ FEEDBACK ════════ */
 function Feedback({fb}){
   if(!fb)return null;
@@ -411,9 +344,6 @@ function Feedback({fb}){
   );
 }
 
-  React.useEffect(()=>{
-    localStorage.setItem("vocab_data",JSON.stringify(rows));
-  },[rows]);
 /* ════════ THEME PANEL ════════ */
 function ThemePanel({current,onChange,onClose}){
   return e("div",{className:"overlay",onClick:onClose},
@@ -466,7 +396,6 @@ function ThemePanel({current,onChange,onClose}){
   );
 }
 
-  const apiKey="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";
 /* ════════ NEW FILE MODAL ════════ */
 function NewFileModal({onConfirm,onCancel}){
   const [name,setName]=useState("");
@@ -489,7 +418,6 @@ function NewFileModal({onConfirm,onCancel}){
   );
 }
 
-  const addRow=()=>setRows(r=>[...r,{word:"",meaning:"",example:"",feedback:null,loading:false}]);
 /* ════════ IMPORT MODAL ════════ */
 function ImportModal({onImport,onCancel}){
   const [err,setErr]=useState("");
@@ -518,11 +446,6 @@ function ImportModal({onImport,onCancel}){
   );
 }
 
-  const update=(i,f,v)=>{
-    setRows(r=>{
-      const c=[...r];
-      c[i]={...c[i],[f]:v};
-      return c;
 /* ════════ MAIN APP ════════ */
 function App(){
   const init=loadState();
@@ -569,7 +492,6 @@ function App(){
       if(activeId===id)setActiveId(next[0].id);
       return next;
     });
-  };
   }
 
   const addRow=()=>setRows(r=>[...r,{id:uid(),word:"",meaning:"",example:"",feedback:null,loading:false}]);
@@ -577,10 +499,6 @@ function App(){
   const del=i=>setRows(r=>r.filter((_,idx)=>idx!==i));
   const clearField=field=>setRows(r=>r.map(x=>({...x,[field]:field==="feedback"?null:""})));
 
-  async function check(i){
-    setRows(r=>{
-      const c=[...r]; c[i].loading=true; return c;
-    });
   function saveToLibrary(i){
     const item=rows[i];if(!item||!item.word)return;
     setLibrary(lib=>[{...item,id:uid(),fileId:activeId,fileName:activeFile.name},...lib]);
@@ -592,98 +510,25 @@ function App(){
     setRows(r=>{const c=[...r];c[i]={...c[i],loading:true};return c;});
     try{
       const row=rows[i];
-      if(!row.word||!row.example) throw "missing";
-
       if(!row.word||!row.example)throw"Missing word or example";
       const res=await fetch("https://api.groq.com/openai/v1/chat/completions",{
         method:"POST",
-        headers:{
-          "Authorization":"Bearer "+apiKey,
-          "Content-Type":"application/json"
-        },
         headers:{"Authorization":"Bearer "+API_KEY,"Content-Type":"application/json"},
         body:JSON.stringify({
           model:"llama-3.3-70b-versatile",
           messages:[
-            {
-              role:"system",
-              content:`Return JSON:
-{
-"score":"x/10",
-"meaning_status":"Correct/Incorrect",
-"errors":"short phrases, comma separated",
-"improved":"short natural sentence"
-}
-Keep it concise.`
-            },
-            {
-              role:"user",
-              content:`Word: ${row.word}
-Meaning: ${row.meaning}
-Example: ${row.example}`
-            }
             {role:"system",content:`Return JSON only:\n{"score":"x/10","meaning_status":"Correct/Incorrect","errors":"short phrases, comma separated","improved":"short natural sentence"}\nKeep it concise.`},
             {role:"user",content:`Word: ${row.word}\nMeaning: ${row.meaning}\nExample: ${row.example}`}
           ]
         })
       });
-
       const data=await res.json();
       const txt=data?.choices?.[0]?.message?.content||"{}";
-
-      setRows(r=>{
-        const c=[...r];
-        c[i].feedback=safeParse(txt);
-        c[i].loading=false;
-        return c;
-      });
-
-    }catch{
-      setRows(r=>{
-        const c=[...r];
-        c[i].feedback={errors:"AI error"};
-        c[i].loading=false;
-        return c;
-      });
       setRows(r=>{const c=[...r];c[i]={...c[i],feedback:safeParse(txt),loading:false};return c;});
     }catch(ex){
       setRows(r=>{const c=[...r];c[i]={...c[i],feedback:{errors:String(ex)},loading:false};return c;});
     }
   }
-
-  const clear=(f)=>setRows(r=>r.map(x=>({...x,[f]:f==="feedback"?null:""})));
-
-  /* FEEDBACK */
-  function Feedback(fb){
-    if(!fb) return null;
-
-    const errors = formatErrors(fb.errors);
-
-    return e("div",{
-      className:"rounded-xl border bg-white shadow-sm p-3 space-y-2 text-xs"
-    },
-
-      e("div",{className:"flex justify-between border-b pb-1"},
-        e("span",{className:"font-semibold text-gray-700"},"AI Review"),
-        e("span",{className:"text-green-600 font-bold"},fb.score||"?")
-      ),
-
-      e("div",{
-        className: fb.meaning_status==="Correct"
-        ? "text-green-600 font-medium"
-        : "text-red-500 font-medium"
-      }, fb.meaning_status||""),
-
-      errors.length>0 && e("ul",{
-        className:"bg-red-50 border border-red-200 rounded p-2 text-red-600 list-disc list-inside"
-      },
-        errors.slice(0,3).map((er,i)=>e("li",{key:i},er))
-      ),
-
-      fb.improved && e("div",{
-        className:"bg-blue-50 border border-blue-200 rounded p-2 text-blue-700 italic"
-      }, fb.improved)
-    );
   const checkAll=()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*280));
 
   function exportJSON(){
@@ -700,13 +545,6 @@ Example: ${row.example}`
     setShowImport(false);setTransKey(k=>k+1);
   }
 
-  return e("div",{className:"p-4 md:p-5 max-w-7xl mx-auto"},
-
-    /* HEADER */
-    e("div",{className:"flex flex-wrap gap-2 justify-between mb-4"},
-      e("div",{className:"flex gap-2 flex-wrap"},
-        e("button",{onClick:addRow,className:"btn bg-blue-500 text-white"},"＋ Add"),
-        e("button",{onClick:()=>rows.forEach((_,i)=>setTimeout(()=>check(i),i*250)),className:"btn bg-green-500 text-white"},"⚡ Check All")
   const curTheme=THEMES.find(t=>t.id===theme)||THEMES[0];
 
   return e("div",{style:{minHeight:"100vh",display:"flex",flexDirection:"column"}},
@@ -726,11 +564,6 @@ Example: ${row.example}`
           border:"1px solid var(--accent-border)",marginLeft:4
         }},"MULTI")
       ),
-      e("div",{className:"flex gap-2 text-xs flex-wrap"},
-        e("button",{onClick:()=>clear("word"),className:"btn bg-gray-200"},"Word"),
-        e("button",{onClick:()=>clear("meaning"),className:"btn bg-purple-100 text-purple-600"},"Meaning"),
-        e("button",{onClick:()=>clear("example"),className:"btn bg-blue-100 text-blue-600"},"Example"),
-        e("button",{onClick:()=>clear("feedback"),className:"btn bg-red-100 text-red-600"},"AI")
       e("div",{style:{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap",justifyContent:"flex-end"}},
         /* Theme button */
         e("button",{
@@ -752,12 +585,6 @@ Example: ${row.example}`
       )
     ),
 
-    /* TABLE */
-    e("div",{className:"table-wrap"},
-      e("table",{className:"min-w-[700px] w-full table-fixed bg-white rounded-xl overflow-hidden shadow-sm"},
-        e("thead",{className:"bg-blue-50 text-sm"},
-          e("tr",null,
-            ["Word","Meaning","Example","AI Feedback",""].map(h=>e("th",{key:h,className:"p-2"},h))
     /* ── FILE TABS ── */
     !showLibrary&&e("div",{style:{
       background:"var(--bg-header)",borderBottom:"1px solid var(--border)",
@@ -779,13 +606,6 @@ Example: ${row.example}`
             },"×")
           )
         ),
-        e("tbody",null,
-          rows.map((row,i)=>
-            e("tr",{key:i,className:"border-t"},
-
-              e("td",{className:"p-2"},
-                e("input",{className:"input",value:row.word,onChange:e=>update(i,"word",e.target.value)})
-              ),
         e("button",{
           className:"btn btn-ghost",style:{fontSize:12,padding:"6px 12px",marginLeft:4},
           onClick:()=>setShowNewFile(true)
@@ -793,9 +613,6 @@ Example: ${row.example}`
       )
     ),
 
-              e("td",{className:"p-2"},
-                e("input",{className:"input text-purple-700",value:row.meaning,onChange:e=>update(i,"meaning",e.target.value)})
-              ),
     /* ── MAIN ── */
     e("main",{style:{flex:1,padding:"20px 16px",maxWidth:1100,margin:"0 auto",width:"100%"}},
       showLibrary
@@ -803,9 +620,6 @@ Example: ${row.example}`
         :e(FileView,{key:transKey,file:activeFile,rows,update,del,check,checkAll,addRow,saveToLibrary,clearField})
     ),
 
-              e("td",{className:"p-2"},
-                e("input",{className:"input text-blue-700",value:row.example,onChange:e=>update(i,"example",e.target.value)})
-              ),
     /* ── MODALS ── */
     showTheme&&e(ThemePanel,{current:theme,onChange:setTheme,onClose:()=>setShowTheme(false)}),
     showNewFile&&e(NewFileModal,{onConfirm:createFile,onCancel:()=>setShowNewFile(false)}),
@@ -813,8 +627,6 @@ Example: ${row.example}`
   );
 }
 
-              e("td",{className:"p-2"},
-                row.loading ? e("div",{className:"spinner"}) : e(Feedback,row.feedback)
 /* ════════ LIBRARY VIEW ════════ */
 function LibraryView({library,removeFromLibrary}){
   return e("div",{className:"fade-in"},
@@ -847,12 +659,6 @@ function LibraryView({library,removeFromLibrary}){
                   onClick:()=>removeFromLibrary(item.id)
                 },"×")
               ),
-
-              e("td",{className:"p-2"},
-                e("button",{onClick:()=>check(i),className:"btn bg-green-100 mr-1"},"✔"),
-                e("button",{onClick:()=>del(i),className:"btn bg-red-100"},"✖")
-              )
-
               item.meaning&&e("div",{style:{color:"var(--purple)",fontSize:13,marginTop:4}},item.meaning),
               item.example&&e("div",{style:{
                 color:"var(--text-muted)",fontSize:12,fontStyle:"italic",
@@ -927,8 +733,8 @@ function WordCard({row,i,update,del,check,saveToLibrary}){
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
 const root=ReactDOM.createRoot(document.getElementById("root"));
 root.render(e(App));
 </script>
 </body>
+</html>
