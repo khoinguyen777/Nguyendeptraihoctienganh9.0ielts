@@ -305,7 +305,7 @@ function loadState(){
   try{files=JSON.parse(localStorage.getItem("vam_files")||"null");}catch{}
   try{library=JSON.parse(localStorage.getItem("vam_library")||"[]");}catch{}
   try{activeId=localStorage.getItem("vam_active");}catch{}
-  try{theme=localStorage.getItem("vam_theme")||"light";}catch{theme="light";}
+  theme="light"
   if(!Array.isArray(files)||files.length===0){
     const id=uid();
     files=[{id,name:"IELTS Vocab",rows:[]}];
