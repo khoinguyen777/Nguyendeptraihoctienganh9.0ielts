@@ -325,8 +325,29 @@ body{
   .sidebar.open{
     transform:translateX(0);
   }
+  header {
+    overflow-x: auto !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 0 12px !important;
+    scrollbar-width: none;
+  }
+  header::-webkit-scrollbar { display: none; }
+  .sticky-toolbar-inner {
+    overflow-x: auto !important;
+    display: flex !important;
+    flex-wrap: nowrap !important; 
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    scrollbar-width: none;
+  }
+  .sticky-toolbar-inner::-webkit-scrollbar { display: none; }
+  .content-inner {
+    padding: 0 10px 20px !important;
+  }
 }
-
 .sidebar-top{flex-shrink:0;}
 .sidebar-file-list{
   flex:1;overflow-y:auto;padding:6px 10px;
