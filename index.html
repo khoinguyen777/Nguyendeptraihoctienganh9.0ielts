@@ -13,13 +13,13 @@
 <!-- ══ React ══ -->
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{
-  font-family:'Be Vietnam Pro','Syne',sans-serif;
+  font-family:'Be Vietnam Pro',sans-serif;
   background:var(--bg);color:var(--text);
   -webkit-tap-highlight-color:transparent;
   transition:background .35s,color .35s;
@@ -137,11 +137,12 @@ body{
 .inp:hover{border-color:var(--border-strong);}
 .inp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3.5px var(--accent-light);border-width:2px;}
 .inp::placeholder{color:var(--text-faint);font-weight:400;}
+textarea.inp{resize:vertical;font-family:'Be Vietnam Pro',sans-serif;}
 
 /* ════ BUTTONS ════ */
 .btn{
   padding:9px 16px;border-radius:10px;font-size:13px;
-  font-family:'Syne',sans-serif;font-weight:700;
+  font-family:'Be Vietnam Pro',sans-serif;font-weight:700;
   cursor:pointer;transition:all .18s;border:none;
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
@@ -231,7 +232,7 @@ body{
 
 /* ════ COUNTDOWN ════ */
 .countdown-box{background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin:6px 10px;}
-.cd-num{font-size:32px;font-weight:800;color:var(--accent);font-family:'Syne',sans-serif;line-height:1;}
+.cd-num{font-size:32px;font-weight:800;color:var(--accent);font-family:'Be Vietnam Pro',sans-serif;line-height:1;}
 .cd-lbl{font-size:12px;font-weight:600;color:var(--sidebar-text-muted);font-family:'Be Vietnam Pro',sans-serif;letter-spacing:.02em;text-transform:uppercase;}
 
 /* ════ WORD CARD ════ */
@@ -271,8 +272,9 @@ body{
 .tag{display:inline-block;font-size:11px;font-family:'Be Vietnam Pro',sans-serif;font-weight:600;padding:2px 8px;border-radius:5px;}
 
 /* ════ MODAL ════ */
-.overlay{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(8px);}
-.modal{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:24px;width:90%;max-width:440px;box-shadow:0 20px 70px var(--shadow);animation:fadeIn .22s ease both;}
+.overlay{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(8px);padding:20px;}
+.modal{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:24px;width:90%;max-width:440px;box-shadow:0 20px 70px var(--shadow);animation:fadeIn .22s ease both;max-height:88vh;overflow-y:auto;}
+.modal.modal-wide{max-width:640px;}
 
 /* ════ HAMBURGER ════ */
 .hamburger{background:none;border:none;cursor:pointer;color:var(--text-muted);display:flex;flex-direction:column;gap:4px;padding:6px;border-radius:8px;transition:color .15s;}
@@ -280,7 +282,7 @@ body{
 .hamburger span{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;transition:all .22s;}
 
 /* ════ SETTINGS TABS ════ */
-.stab{padding:7px 16px;border-radius:8px;font-size:12px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--text-muted);transition:all .15s;}
+.stab{padding:7px 16px;border-radius:8px;font-size:12px;font-family:'Be Vietnam Pro',sans-serif;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--text-muted);transition:all .15s;}
 .stab.active{background:var(--accent-light);color:var(--accent);}
 .stab:hover:not(.active){color:var(--text);}
 
@@ -310,10 +312,10 @@ body{
   animation:fadeIn .35s ease both;
 }
 .login-logo{text-align:center;margin-bottom:28px;}
-.login-logo-main{font-size:28px;font-weight:900;letter-spacing:-.03em;font-family:'Syne',sans-serif;}
+.login-logo-main{font-size:28px;font-weight:900;letter-spacing:-.03em;font-family:'Be Vietnam Pro',sans-serif;}
 .login-logo-sub{font-size:12px;font-weight:600;color:var(--text-muted);font-family:'Be Vietnam Pro',sans-serif;margin-top:4px;letter-spacing:.05em;text-transform:uppercase;}
 .login-tabs{display:flex;background:var(--surface2);border-radius:12px;padding:4px;margin-bottom:22px;gap:4px;}
-.login-tab{flex:1;padding:8px;border-radius:9px;border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;transition:all .2s;background:transparent;color:var(--text-muted);}
+.login-tab{flex:1;padding:8px;border-radius:9px;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:13px;transition:all .2s;background:transparent;color:var(--text-muted);}
 .login-tab.active{background:var(--accent);color:var(--accent-text);box-shadow:0 2px 10px var(--shadow);}
 .login-field{margin-bottom:14px;}
 .login-label{display:block;font-size:12px;font-weight:700;color:var(--text-muted);font-family:'Be Vietnam Pro',sans-serif;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;}
@@ -322,12 +324,27 @@ body{
 
 /* ════ LOADING ════ */
 .loading-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);flex-direction:column;gap:16px;}
-.loading-logo{font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif;letter-spacing:-.03em;}
+.loading-logo{font-size:24px;font-weight:900;color:var(--accent);font-family:'Be Vietnam Pro',sans-serif;letter-spacing:-.03em;}
 .loading-dots{display:flex;gap:6px;}
 .loading-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotBounce 1.2s infinite ease-in-out;}
 .loading-dot:nth-child(2){animation-delay:.2s;}
 .loading-dot:nth-child(3){animation-delay:.4s;}
 @keyframes dotBounce{0%,80%,100%{transform:scale(0);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* ════ TEST MODE ════ */
+.test-shell{max-width:640px;margin:32px auto 0;padding:0 16px;}
+.test-card{background:var(--surface);border:1.5px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:var(--shadow-card);text-align:center;}
+.test-progress{font-size:13px;font-weight:700;color:var(--text-muted);font-family:'Be Vietnam Pro',sans-serif;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;}
+.test-bar-track{height:6px;border-radius:6px;background:var(--surface2);overflow:hidden;margin-bottom:26px;}
+.test-bar-fill{height:100%;background:var(--accent);border-radius:6px;transition:width .3s ease;}
+.test-meaning{font-size:28px;font-weight:800;color:var(--accent);font-family:'Be Vietnam Pro',sans-serif;margin:18px 0 26px;letter-spacing:-.02em;line-height:1.25;}
+.test-input{font-size:20px;text-align:center;padding:16px;border-radius:14px;border-width:2px;font-family:'Be Vietnam Pro',sans-serif;font-weight:700;}
+.test-feedback-flash{margin-top:14px;font-size:14px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;padding:8px 14px;border-radius:10px;display:inline-block;}
+.tf-correct{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.tf-incorrect{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border);}
+.result-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border);}
+.result-row.r-correct{border-left:4px solid #22c55e;}
+.result-row.r-incorrect{border-left:4px solid #ef4444;}
 
 /* ════ ANIMATIONS ════ */
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -337,6 +354,8 @@ body{
 @media(max-width:767px){
   .hide-mobile{display:none!important;}
   .content-inner{padding:0 12px 24px;}
+  .test-card{padding:26px 18px;}
+  .test-meaning{font-size:22px;}
 }
 @media(min-width:768px){
   .hide-desktop{display:none!important;}
@@ -409,6 +428,20 @@ function shuffle(arr){
   const a=[...arr];
   for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
   return a;
+}
+// Parse raw "word, meaning, example" pasted text (one entry per line) — ported & extended from Tool Cày Từ Vựng
+// Supports 2 fields (word, meaning) or 3 fields (word, meaning, example — example goes to the other input on the card)
+function parseRawPairs(raw){
+  const out=[];
+  (raw||"").trim().split("\n").forEach(line=>{
+    if(!line.includes(","))return;
+    const parts=line.split(",");
+    const word=parts[0].trim();
+    const meaning=(parts[1]||"").trim();
+    const example=parts.length>2?parts.slice(2).join(",").trim():"";
+    if(word)out.push({word,meaning,example});
+  });
+  return out;
 }
 
 /* ════════════════════════════════════
@@ -596,7 +629,7 @@ function SettingsPanel({current,onChange,onClose}){
       tab==="theme"&&e("div",{style:{display:"flex",flexDirection:"column",gap:8}},
         THEMES.map(th=>{
           const act=current===th.id;
-          return e("button",{key:th.id,onClick:()=>onChange(th.id),style:{display:"flex",alignItems:"center",gap:14,padding:"12px 16px",borderRadius:14,cursor:"pointer",width:"100%",textAlign:"left",fontFamily:"'Syne',sans-serif",background:act?"var(--accent-light)":"var(--surface2)",border:act?"1.5px solid var(--accent)":"1.5px solid var(--border)",transition:"all .16s"}},
+          return e("button",{key:th.id,onClick:()=>onChange(th.id),style:{display:"flex",alignItems:"center",gap:14,padding:"12px 16px",borderRadius:14,cursor:"pointer",width:"100%",textAlign:"left",fontFamily:"'Be Vietnam Pro',sans-serif",background:act?"var(--accent-light)":"var(--surface2)",border:act?"1.5px solid var(--accent)":"1.5px solid var(--border)",transition:"all .16s"}},
             e("span",{style:{width:24,height:24,borderRadius:"50%",flexShrink:0,background:th.dot,border:"2.5px solid "+th.ring,boxShadow:act?"0 0 0 3px var(--accent-light)":"none",display:"inline-block",transition:"box-shadow .2s"}}),
             e("div",{style:{flex:1}},e("div",{style:{fontWeight:700,fontSize:14,color:act?"var(--accent)":"var(--text)"}},th.emoji+" "+th.label)),
             act&&e("span",{style:{fontSize:11,color:"var(--accent)",fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,background:"var(--accent-light)",padding:"2px 8px",borderRadius:6,border:"1px solid var(--accent-border)"}},"active")
@@ -617,6 +650,45 @@ function SettingsPanel({current,onChange,onClose}){
         ),
         saved&&e("div",{style:{background:"var(--green-bg)",border:"1px solid var(--green-border)",borderRadius:8,padding:"7px 12px",fontSize:13,color:"var(--green)",fontWeight:700,fontFamily:"'Be Vietnam Pro',sans-serif"}},"✅ Key đã lưu thành công!"),
         !hasKey&&e("p",{style:{fontSize:12,color:"var(--text-muted)",fontFamily:"'Be Vietnam Pro',sans-serif",lineHeight:1.6}},"Lấy API key miễn phí tại console.groq.com → API Keys")
+      )
+    )
+  );
+}
+
+/* ════════════════════════════════════
+   ONBOARDING — ask for API key right away
+════════════════════════════════════ */
+function OnboardingKeyModal({onSave,onSkip}){
+  const [key,setKey]=useState("");
+  const [saving,setSaving]=useState(false);
+  const ref=useRef(null);
+  useEffect(()=>{setTimeout(()=>ref.current?.focus(),80);},[]);
+  function handleSave(){
+    if(!key.trim())return;
+    setSaving(true);
+    saveApiKey(key);
+    setTimeout(()=>onSave(),250);
+  }
+  function handleKey(ev){if(ev.key==="Enter")handleSave();}
+  return e("div",{className:"overlay"},
+    e("div",{className:"modal fade-in"},
+      e("div",{style:{textAlign:"center",marginBottom:18}},
+        e("div",{style:{fontSize:38,marginBottom:8}},"🔑"),
+        e("h3",{style:{fontSize:19,fontWeight:900,color:"var(--accent)",marginBottom:6}},"Cài API Key để bắt đầu"),
+        e("p",{style:{fontSize:13,color:"var(--text-muted)",lineHeight:1.6}},"Vocab AI dùng Groq API để chấm điểm ví dụ của bạn bằng AI. Nhập key ngay để dùng đầy đủ tính năng — bạn có thể đổi lại sau trong Settings.")
+      ),
+      e("div",{style:{marginBottom:12}},
+        e("label",{style:{display:"block",fontSize:12,fontWeight:700,color:"var(--text-muted)",letterSpacing:".05em",textTransform:"uppercase",marginBottom:6}},"Groq API Key"),
+        e("input",{ref,className:"inp",type:"password",placeholder:"gsk_••••••••••••••••••••••",value:key,onChange:ev=>setKey(ev.target.value),onKeyDown:handleKey})
+      ),
+      e("div",{style:{background:"var(--accent-light)",border:"1px solid var(--accent-border)",borderRadius:10,padding:"9px 13px",fontSize:12,color:"var(--accent)",lineHeight:1.6,marginBottom:16}},
+        "☁ Lấy key miễn phí tại console.groq.com → API Keys. Key chỉ lưu trong trình duyệt của bạn."
+      ),
+      e("div",{style:{display:"flex",gap:8}},
+        e("button",{className:"btn btn-ghost",style:{flex:1},onClick:onSkip},"Để sau"),
+        e("button",{className:"btn btn-accent",style:{flex:1,justifyContent:"center"},disabled:!key.trim()||saving,onClick:handleSave},
+          saving?e(React.Fragment,null,e("div",{className:"spinner",style:{borderTopColor:"var(--accent-text)"}}),"Đang lưu…"):"💾 Lưu & Bắt đầu"
+        )
       )
     )
   );
@@ -666,6 +738,31 @@ function ImportModal({onImport,onCancel}){
       err&&e("p",{style:{color:"var(--danger)",fontSize:13,marginBottom:8}},err),
       e("div",{style:{display:"flex",gap:8,justifyContent:"flex-end",marginTop:8}},
         e("button",{className:"btn btn-ghost",onClick:onCancel},"Cancel")
+      )
+    )
+  );
+}
+
+/* ════════════════════════════════════
+   BULK PASTE MODAL  (ported feature from Tool Cày Từ Vựng)
+════════════════════════════════════ */
+function BulkImportModal({fileName,onImport,onCancel}){
+  const [raw,setRaw]=useState("");
+  const ref=useRef(null);
+  useEffect(()=>{setTimeout(()=>ref.current?.focus(),60);},[]);
+  const preview=useMemo(()=>parseRawPairs(raw),[raw]);
+  return e("div",{className:"overlay"},
+    e("div",{className:"modal modal-wide"},
+      e("h3",{style:{fontSize:18,fontWeight:900,color:"var(--accent)",marginBottom:4}},"📥 Bulk Paste"),
+      e("p",{style:{fontSize:13,color:"var(--text-muted)",marginBottom:4}},"Nạp nhanh vào file "+e("strong",null,'"'+fileName+'"')+" — mỗi dòng 1 từ, cú pháp:"),
+      e("p",{style:{fontSize:12,color:"var(--accent)",fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,marginBottom:14,background:"var(--accent-light)",display:"inline-block",padding:"4px 10px",borderRadius:8,border:"1px solid var(--accent-border)"}},"vocab, meaning, example (tuỳ chọn)"),
+      e("textarea",{ref,className:"inp",rows:7,placeholder:"meticulous, tỉ mỉ\nephemeral, chóng tàn, Beauty is ephemeral.",value:raw,onChange:ev=>setRaw(ev.target.value),style:{marginBottom:10}}),
+      e("div",{style:{fontSize:12,color:"var(--text-muted)",fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:600,marginBottom:14}},
+        preview.length>0?`✓ Nhận diện ${preview.length} từ`:"Chưa có từ nào hợp lệ"
+      ),
+      e("div",{style:{display:"flex",gap:8,justifyContent:"flex-end"}},
+        e("button",{className:"btn btn-ghost",onClick:onCancel},"Cancel"),
+        e("button",{className:"btn btn-accent",disabled:preview.length===0,onClick:()=>onImport(preview)},"⚡ Nạp "+preview.length+" từ")
       )
     )
   );
@@ -797,9 +894,135 @@ function LibraryView({library,removeFromLibrary}){
 }
 
 /* ════════════════════════════════════
+   TEST MODE  (ported feature from Tool Cày Từ Vựng, re-skinned)
+   Shows the meaning, user types the English word — same "Sàn Đấu Sinh Tử" concept.
+════════════════════════════════════ */
+function TestSetupCard({file,eligibleCount,onStart,onExit}){
+  return e("div",{className:"test-shell fade-in"},
+    e("div",{className:"test-card"},
+      e("div",{style:{fontSize:38,marginBottom:10}},"🎯"),
+      e("h2",{style:{fontSize:22,fontWeight:900,color:"var(--text)",marginBottom:6}},"Sàn Đấu Sinh Tử"),
+      e("p",{style:{fontSize:14,color:"var(--text-muted)",fontFamily:"'Be Vietnam Pro',sans-serif",marginBottom:20,lineHeight:1.6}},
+        "File "+e("strong",{style:{color:"var(--accent)"}},'"'+(file?.name||"")+'"')+" có "+eligibleCount+" từ đủ điều kiện (có nghĩa). Xem nghĩa, gõ đúng từ tiếng Anh."
+      ),
+      e("div",{style:{display:"flex",gap:10,justifyContent:"center"}},
+        e("button",{className:"btn btn-ghost",onClick:onExit},"← Quay lại"),
+        e("button",{className:"btn btn-green",style:{padding:"11px 22px"},disabled:eligibleCount===0,onClick:onStart},"🚀 Bắt đầu Test")
+      ),
+      eligibleCount===0&&e("p",{style:{marginTop:14,fontSize:12,color:"var(--danger)",fontFamily:"'Be Vietnam Pro',sans-serif"}},"Chưa có từ nào có nghĩa để test. Thêm từ trước nhé!")
+    )
+  );
+}
+
+function TestRunner({words,onFinish,onExit}){
+  const [order]=useState(()=>shuffle(words.map((_,i)=>i)));
+  const [q,setQ]=useState(0);
+  const [answer,setAnswer]=useState("");
+  const [phase,setPhase]=useState("answer"); // "answer" | "review"
+  const [flash,setFlash]=useState(null); // {ok, word, meaning, input}
+  const [results,setResults]=useState([]);
+  const inputRef=useRef(null);
+  const nextBtnRef=useRef(null);
+
+  useEffect(()=>{
+    if(phase==="answer")setTimeout(()=>inputRef.current?.focus(),50);
+    else setTimeout(()=>nextBtnRef.current?.focus(),50);
+  },[q,phase]);
+
+  const cur=words[order[q]];
+  const pct=Math.round((q/words.length)*100);
+
+  function advance(finishedFlash){
+    const nextResults=[...results,finishedFlash];
+    setResults(nextResults);
+    setFlash(null);setAnswer("");setPhase("answer");
+    if(q+1>=words.length){onFinish(nextResults);}
+    else{setQ(q+1);}
+  }
+
+  function handleSubmit(ev){
+    ev.preventDefault();
+    if(phase==="answer"){
+      const given=answer.trim();
+      const correctAns=(cur.word||"").trim();
+      const ok=given.toLowerCase()===correctAns.toLowerCase();
+      setFlash({word:correctAns,meaning:cur.meaning,input:given,ok});
+      setPhase("review");
+    } else {
+      advance(flash);
+    }
+  }
+
+  return e("div",{className:"test-shell fade-in"},
+    e("div",{className:"test-card"},
+      e("div",{className:"test-progress"},`Câu ${q+1} / ${words.length}`),
+      e("div",{className:"test-bar-track"},e("div",{className:"test-bar-fill",style:{width:pct+"%"}})),
+      e("div",{className:"test-meaning"},cur.meaning||"(không có nghĩa)"),
+      e("form",{onSubmit:handleSubmit},
+        e("input",{ref:inputRef,className:"inp test-input",placeholder:"Gõ tiếng Anh vào đây…",value:answer,onChange:ev=>setAnswer(ev.target.value),autoComplete:"off",disabled:phase==="review"}),
+        phase==="answer"
+          ?e("button",{type:"submit",className:"btn btn-accent",style:{width:"100%",marginTop:18,padding:"14px 0",fontSize:15,justifyContent:"center"}},"Chốt đáp án (Enter) ↵")
+          :e("button",{ref:nextBtnRef,type:"submit",className:"btn btn-green",style:{width:"100%",marginTop:18,padding:"14px 0",fontSize:15,justifyContent:"center"}},q+1>=words.length?"Xem kết quả (Enter) ↵":"Câu tiếp theo (Enter) →")
+      ),
+      flash&&phase==="review"&&e("div",{className:"test-feedback-flash "+(flash.ok?"tf-correct":"tf-incorrect")},
+        flash.ok?"✅ Chính xác!":`❌ Sai — đáp án đúng: ${flash.word}`
+      ),
+      e("button",{className:"btn btn-ghost",style:{marginTop:20},onClick:onExit},"✕ Thoát test")
+    )
+  );
+}
+
+function TestResults({results,onRetry,onExit}){
+  const correct=results.filter(r=>r.ok).length;
+  const total=results.length;
+  return e("div",{className:"test-shell fade-in",style:{maxWidth:760}},
+    e("div",{className:"test-card",style:{textAlign:"left"}},
+      e("div",{style:{textAlign:"center",marginBottom:22}},
+        e("div",{style:{fontSize:38,marginBottom:6}},correct===total?"🏆":"📊"),
+        e("h2",{style:{fontSize:22,fontWeight:900,color:"var(--text)",marginBottom:6}},"Báo Cáo Thiệt Hại"),
+        e("div",{style:{display:"inline-flex",gap:10}},
+          e("span",{className:"tag-pill tp-green"},"✔ Đúng: "+correct),
+          e("span",{className:"tag-pill tp-red"},"✕ Sai: "+(total-correct))
+        )
+      ),
+      e("div",{style:{display:"flex",flexDirection:"column",gap:8,marginBottom:22}},
+        results.map((r,i)=>e("div",{key:i,className:"result-row "+(r.ok?"r-correct":"r-incorrect")},
+          e("div",{style:{flex:1}},
+            e("div",{style:{fontWeight:800,fontSize:14,color:"var(--text)"}},r.word),
+            e("div",{style:{fontSize:12,color:"var(--text-muted)",fontFamily:"'Be Vietnam Pro',sans-serif"}},r.meaning)
+          ),
+          e("div",{style:{textAlign:"right"}},
+            e("div",{style:{fontSize:13,fontWeight:700,color:r.ok?"var(--green)":"var(--danger)",fontFamily:"'Be Vietnam Pro',sans-serif"}},r.input||"(bỏ trống)"),
+            e("div",{style:{fontSize:11,color:"var(--text-faint)",fontFamily:"'Be Vietnam Pro',sans-serif"}},r.ok?"Ngon":"Oẳng")
+          )
+        ))
+      ),
+      e("div",{style:{display:"flex",gap:10}},
+        e("button",{className:"btn btn-ghost",style:{flex:1},onClick:onExit},"← Về danh sách từ"),
+        e("button",{className:"btn btn-accent",style:{flex:1},onClick:onRetry},"🔁 Làm lại")
+      )
+    )
+  );
+}
+
+function TestView({file,rows,onExit}){
+  const [phase,setPhase]=useState("setup"); // setup | running | result
+  const [results,setResults]=useState([]);
+  const eligible=useMemo(()=>rows.filter(r=>r.word&&r.meaning),[rows]);
+
+  if(phase==="setup"){
+    return e(TestSetupCard,{file,eligibleCount:eligible.length,onStart:()=>setPhase("running"),onExit});
+  }
+  if(phase==="running"){
+    return e(TestRunner,{words:eligible,onExit:()=>setPhase("setup"),onFinish:res=>{setResults(res);setPhase("result");}});
+  }
+  return e(TestResults,{results,onRetry:()=>setPhase("running"),onExit});
+}
+
+/* ════════════════════════════════════
    FILE VIEW
 ════════════════════════════════════ */
-function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal}){
+function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal,onBulkImport,onStartTest}){
   const [fcOrder,setFcOrder]=useState(null);
   useEffect(()=>{setFcOrder(null);},[flashcard,file?.id]);
 
@@ -816,7 +1039,9 @@ function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,arch
       e("div",{className:"sticky-toolbar-inner"},
         e("div",{style:{display:"flex",gap:7,flexWrap:"wrap",alignItems:"center"}},
           e("button",{onClick:addRow,className:"btn btn-accent",style:{padding:"8px 14px"}},"＋ Add Word"),
-          e("button",{onClick:checkAll,className:"btn btn-green",style:{padding:"8px 14px"}},"⚡ Check All"),
+          e("button",{onClick:onBulkImport,className:"btn btn-blue",style:{padding:"8px 14px"}},"📥 Bulk Paste"),
+          e("button",{onClick:onStartTest,className:"btn btn-green",style:{padding:"8px 14px"}},"🎯 Test"),
+          e("button",{onClick:checkAll,className:"btn btn-purple",style:{padding:"8px 14px"}},"⚡ AI Check All"),
           correctCount>0&&e("button",{onClick:archiveAllCorrect,className:"btn btn-purple",style:{padding:"8px 14px",fontSize:12}},"⭐ Archive Correct ("+correctCount+")"),
           flashcard&&e("button",{onClick:handleShuffle,className:"btn btn-yellow",style:{padding:"8px 12px",fontSize:12}},"🔀 Shuffle")
         ),
@@ -841,7 +1066,7 @@ function FileView({file,rows,update,del,check,checkAll,addRow,saveToLibrary,arch
           ?e("div",{style:{textAlign:"center",color:"var(--text-muted)",paddingTop:80}},
               e("p",{style:{fontSize:48,marginBottom:12}},"✦"),
               e("p",{style:{fontSize:17,fontWeight:800,color:"var(--text)",marginBottom:6}},file?.name),
-              e("p",{},'Click "＋ Add Word" to start.')
+              e("p",{},'Click "＋ Add Word" hoặc "📥 Bulk Paste" để bắt đầu.')
             )
           :e("div",{style:{display:"flex",flexDirection:"column",gap:12,paddingTop:4}},
               displayRows.map(i=>{
@@ -920,8 +1145,11 @@ function App({user}){
   const [selected,setSelected]=useState(new Set());
   const [showNewFile,setShowNewFile]=useState(false);
   const [showImport,setShowImport]=useState(false);
+  const [showBulkImport,setShowBulkImport]=useState(false);
   const [showLibrary,setShowLibrary]=useState(false);
+  const [showTest,setShowTest]=useState(false);
   const [showSettings,setShowSettings]=useState(false);
+  const [showOnboarding,setShowOnboarding]=useState(()=>getApiKey().length<=10);
   const [flashcard,setFlashcard]=useState(false);
   const [transKey,setTransKey]=useState(0);
   const [isMobile,setIsMobile]=useState(window.innerWidth<768);
@@ -1023,7 +1251,7 @@ function App({user}){
     }));
   },[activeId]);
 
-  function switchFile(id){setActiveId(id);setShowLibrary(false);setTransKey(k=>k+1);}
+  function switchFile(id){setActiveId(id);setShowLibrary(false);setShowTest(false);setTransKey(k=>k+1);}
   function toggleSelect(id){setSelected(s=>{const n=new Set(s);n.has(id)?n.delete(id):n.add(id);return n;});}
   function createFile(name){
     const id=uid();
@@ -1061,6 +1289,15 @@ function App({user}){
     if(rows.length===0)return;
     if(!confirm(`🗑 Xoá tất cả ${rows.length} từ trong file "${activeFile?.name}"?`))return;
     setRows(()=>[]);
+  }
+
+  // ── Bulk paste import (ported from Tool Cày Từ Vựng, extended with example field) ──
+  function bulkImportPairs(pairs){
+    setRows(r=>[
+      ...r,
+      ...pairs.map(p=>({id:uid(),word:p.word,meaning:p.meaning,example:p.example||"",tag:"",feedback:null,loading:false,revealed:false}))
+    ]);
+    setShowBulkImport(false);
   }
 
   // ── Library ──
@@ -1134,6 +1371,19 @@ function App({user}){
 
   if(!loaded){return e(LoadingScreen);}
 
+  if(showOnboarding){
+    return e(React.Fragment,null,
+      e("div",{className:"app-shell",style:{filter:"blur(2px)",pointerEvents:"none"}},
+        e("header",{style:{height:54,flexShrink:0,background:"var(--bg-header)",borderBottom:"1.5px solid var(--border)"}}),
+        e("div",{className:"app-body"})
+      ),
+      e(OnboardingKeyModal,{
+        onSave:()=>setShowOnboarding(false),
+        onSkip:()=>setShowOnboarding(false)
+      })
+    );
+  }
+
   return e("div",{className:"app-shell"},
 
     /* ───── HEADER ───── */
@@ -1154,9 +1404,9 @@ function App({user}){
       ),
       e("div",{style:{display:"flex",gap:6,alignItems:"center"}},
         /* Sync status */
-        e("span",{className:"sync-badge "+(syncStatus==="saving"?"sync-saving":syncStatus==="error"?"sync-error":"sync-saved"),className2:undefined,style:{fontSize:11,fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,padding:"3px 9px",borderRadius:6,border:"1px solid",borderColor:syncStatus==="saving"?"var(--yellow-border)":syncStatus==="error"?"var(--danger-border)":"var(--green-border)",background:syncStatus==="saving"?"var(--yellow-bg)":syncStatus==="error"?"var(--danger-bg)":"var(--green-bg)",color:syncStatus==="saving"?"var(--yellow)":syncStatus==="error"?"var(--danger)":"var(--green)",display:"inline-flex",alignItems:"center",gap:5}},
+        e("span",{className:"sync-badge "+(syncStatus==="saving"?"sync-saving":syncStatus==="error"?"sync-error":"sync-saved"),style:{fontSize:11,fontFamily:"'Be Vietnam Pro',sans-serif",fontWeight:700,padding:"3px 9px",borderRadius:6,display:"inline-flex",alignItems:"center",gap:5}},
           syncStatus==="saving"
-            ?e(React.Fragment,null,e("div",{className:"spinner",style:{width:10,height:10,borderWidth:1.5,borderColor:"var(--yellow-border)",borderTopColor:"var(--yellow)"}}))
+            ?e(React.Fragment,null,e("div",{className:"spinner",style:{width:10,height:10,borderWidth:1.5}}))
             :e("span",{},syncStatus==="error"?"⚠":"☁"),
           e("span",{className:"hide-mobile"},syncStatus==="saving"?"Saving…":syncStatus==="error"?"Error":"Synced")
         ),
@@ -1191,16 +1441,20 @@ function App({user}){
         onAddNew:()=>setShowNewFile(true),
         onDeleteSelected:deleteSelected,
         onClearAll:clearAll,
-        onToggleLibrary:()=>setShowLibrary(v=>!v),
+        onToggleLibrary:()=>{setShowLibrary(v=>!v);setShowTest(false);},
         onExamDateChange:setExamDate,
         onClose:()=>setSidebarOpen(false)
       }),
       e("div",{className:"content-area"},
-        showLibrary
+        showTest
+          ?e("div",{className:"content-scroll"},e(TestView,{key:"test-"+activeId,file:activeFile,rows,onExit:()=>setShowTest(false)}))
+          :showLibrary
           ?e(LibraryView,{key:"lib",library,removeFromLibrary})
           :e(FileView,{
               key:transKey,file:activeFile,rows,update,del,check,checkAll,
-              addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal
+              addRow,saveToLibrary,archiveAllCorrect,clearField,clearAllWords,flashcard,toggleReveal,
+              onBulkImport:()=>setShowBulkImport(true),
+              onStartTest:()=>setShowTest(true)
             })
       )
     ),
@@ -1208,7 +1462,8 @@ function App({user}){
     /* ───── MODALS ───── */
     showSettings&&e(SettingsPanel,{current:theme,onChange:setTheme,onClose:()=>setShowSettings(false)}),
     showNewFile&&e(NewFileModal,{onConfirm:createFile,onCancel:()=>setShowNewFile(false)}),
-    showImport&&e(ImportModal,{onImport:doImport,onCancel:()=>setShowImport(false)})
+    showImport&&e(ImportModal,{onImport:doImport,onCancel:()=>setShowImport(false)}),
+    showBulkImport&&e(BulkImportModal,{fileName:activeFile?.name||"",onImport:bulkImportPairs,onCancel:()=>setShowBulkImport(false)})
   );
 }
 
